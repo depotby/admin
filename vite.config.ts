@@ -9,6 +9,13 @@ import getCssModulesNamesGenerator from './utils/css-modules-names-generator';
 export default defineConfig({
   build: {
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'chunks/[hash].js',
+        entryFileNames: 'entries/[hash].js',
+        assetFileNames: 'assets/[hash][extname]',
+      },
+    },
   },
   css: {
     modules: {
