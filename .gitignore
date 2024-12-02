@@ -28,3 +28,9 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Custom directories
+
+# Custom files
+/.env*
+!/.env.example
