@@ -15,7 +15,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "generate:sprites": "tsx utils/sprites-generator.ts"
   },
   "dependencies": {
     "@unhead/vue": "^1.11.13",
