@@ -1,0 +1,28 @@
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+$font-weights: (
+  'Thin': 100,
+  'ExtraLight': 200,
+  'Light': 300,
+  'Regular': 400,
+  'Medium': 500,
+  'SemiBold': 600,
+  'Bold': 700,
+  'ExtraBold': 800,
+  'Black': 900,
+);
+
+@each $name, $weight in $font-weights {
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: $weight;
+    font-display: swap;
+    src: url('@/assets/fonts/inter/Inter-#{$name}.ttf') format('truetype');
+  }
+}
