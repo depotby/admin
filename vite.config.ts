@@ -7,11 +7,8 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 import getCssModulesNamesGenerator from './utils/css-modules-names-generator';
 
 export default defineConfig({
-  plugins: [vue(), vueDevTools()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
+  build: {
+    emptyOutDir: true,
   },
   css: {
     modules: {
@@ -21,6 +18,12 @@ export default defineConfig({
       scss: {
         additionalData: '@use "@/assets/styles/global.scss" as *;',
       },
+    },
+  },
+  plugins: [vue(), vueDevTools()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 });
