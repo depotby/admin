@@ -4,12 +4,23 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueDevTools from 'vite-plugin-vue-devtools';
 
-// https://vite.dev/config/
+import getCssModulesNamesGenerator from './utils/css-modules-names-generator';
+
 export default defineConfig({
   plugins: [vue(), vueDevTools()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  css: {
+    modules: {
+      generateScopedName: getCssModulesNamesGenerator(process.env.NODE_ENV === 'production'),
+    },
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@use "@/assets/styles/global.scss" as *;',
+      },
     },
   },
 });
