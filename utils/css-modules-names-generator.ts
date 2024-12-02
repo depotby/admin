@@ -1,7 +1,7 @@
 const getCssModulesNamesGenerator = (
   isProduction: boolean,
-): ((name: string, filename: string) => string) => {
-  if (!isProduction) return (name) => name;
+): ((name: string, filename: string) => string) | ((name: string) => string) => {
+  if (!isProduction) return (name: string) => name;
 
   const generatedNames = new Map<string, string>();
 
