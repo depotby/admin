@@ -30,6 +30,7 @@ coverage
 *.tsbuildinfo
 
 # Custom directories
+/src/assets/sprites
 
 # Custom files
 /.env*
