@@ -12,7 +12,7 @@ const route = useRoute();
 const layout = computed(() => {
   switch (route.meta.layout) {
     case undefined:
-      return undefined
+      return undefined;
     case 'authentication':
       return LayoutAuthentication;
     default:

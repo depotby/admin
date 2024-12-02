@@ -6,7 +6,7 @@ const i18n = createI18n({
   locale: 'ru',
   messages: {
     ru,
-  }
+  },
 });
 
 export default i18n;
