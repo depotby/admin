@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { useAxios } from '@/composables/use-axios.ts';
 import type { Api } from '@/types/composables/use-api.ts';
 
@@ -11,6 +12,10 @@ export const useApi = () => {
       authentications: {
         create: (data) => axios('/admin/authentications', { method: 'post', data }),
       },
+      user: {
+        info: () => axios('/admin/user', { method: 'get' }),
+      },
+      isAxiosError,
     };
   }
 

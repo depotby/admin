@@ -1,5 +1,26 @@
 {
-  "labels": {
-    "sign_in": "Вход"
+  "meta": {
+    "title_template": "%s - Depot"
+  },
+  "pages": {
+    "authentication": {
+      "sign_in": {
+        "meta": {
+          "title": "Вход"
+        },
+        "title": "Авторизация",
+        "form": {
+          "email": {
+            "label": "Email",
+            "placeholder": "user{'@'}example.com"
+          },
+          "password": {
+            "label": "Пароль",
+            "placeholder": "Пароль"
+          },
+          "action": "Войти"
+        }
+      }
+    }
   }
 }

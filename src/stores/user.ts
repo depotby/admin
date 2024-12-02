@@ -34,7 +34,10 @@ export const useUserStore = defineStore('user', () => {
     updateTokens(data.tokens);
   };
 
-  const loadUser = async () => {};
+  const loadUser = async () => {
+    const { data } = await api.user.info();
+    user.value = data;
+  };
 
   return {
     access_token,
