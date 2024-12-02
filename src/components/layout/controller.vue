@@ -11,6 +11,8 @@ const route = useRoute();
 
 const layout = computed(() => {
   switch (route.meta.layout) {
+    case undefined:
+      return undefined
     case 'authentication':
       return LayoutAuthentication;
     default:
@@ -21,7 +23,7 @@ const layout = computed(() => {
 
 <template>
   <Suspense>
-    <component :is="layout">
+    <component v-if="layout" :is="layout">
       <slot />
     </component>
   </Suspense>
