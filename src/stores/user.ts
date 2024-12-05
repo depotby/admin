@@ -34,9 +34,22 @@ export const useUserStore = defineStore('user', () => {
     updateTokens(data.tokens);
   };
 
+  const refreshTokens = async () => {
+    if (!refresh_token.value) return;
+
+    const { data } = await api.authentications.refresh({ token: refresh_token.value });
+    updateTokens(data.tokens);
+  };
+
   const loadUser = async () => {
     const { data } = await api.user.info();
     user.value = data;
+  };
+
+  const autologin = async () => {
+    if (!isAuthorized.value) return;
+
+    await loadUser();
   };
 
   return {
@@ -46,6 +59,8 @@ export const useUserStore = defineStore('user', () => {
     isAuthorized,
     updateTokens,
     createTokens,
+    refreshTokens,
     loadUser,
+    autologin,
   };
 });

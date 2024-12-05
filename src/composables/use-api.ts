@@ -10,7 +10,10 @@ export const useApi = () => {
 
     instance = {
       authentications: {
-        create: (data) => axios('/admin/authentications', { method: 'post', data }),
+        create: (data) =>
+          axios('/admin/authentications', { method: 'post', data, __noRefresh: true }),
+        refresh: (data) =>
+          axios('/admin/authentications', { method: 'put', data, __noRefresh: true }),
       },
       user: {
         info: () => axios('/admin/user', { method: 'get' }),

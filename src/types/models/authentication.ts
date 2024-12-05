@@ -11,3 +11,7 @@ export interface AuthenticationResponseData {
     refresh: string;
   };
 }
+
+export interface RefreshData {
+  token: string;
+}
