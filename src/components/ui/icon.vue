@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import main from '@/assets/sprites/main.svg?url';
+import main from '@/assets/sprites/main.svg';
 import { useCssModule, computed } from 'vue';
 import { useCssVariable } from '@/composables/use-css-variable.ts';
 import type { Color } from '@/types/assets/colors';
