@@ -1,0 +1,19 @@
+@use '../_variables/media-queries' as *;
+
+@mixin media-query-tablet {
+  @media (min-width: #{$media-query-tablet}) {
+    @content;
+  }
+}
+
+@mixin media-query-desktop {
+  @media (min-width: #{$media-query-desktop}) {
+    @content;
+  }
+}
+
+@mixin media-query-desktop-xl {
+  @media (min-width: #{$media-query-desktop-xl}) {
+    @content;
+  }
+}
