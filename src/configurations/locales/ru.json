@@ -2,6 +2,12 @@
   "meta": {
     "title_template": "%s - Depot"
   },
+  "labels": {
+    "dashboard": "Панель управления",
+    "users": "Пользователи",
+    "roles": "Роли",
+    "categories": "Категории"
+  },
   "pages": {
     "authentication": {
       "sign_in": {
