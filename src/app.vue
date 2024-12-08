@@ -7,6 +7,7 @@ const { t } = useI18n();
 
 useHead(() => ({
   titleTemplate: t('meta.title_template'),
+  title: t('labels.loading_with_dots'),
 }));
 </script>
 

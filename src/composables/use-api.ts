@@ -18,6 +18,10 @@ export const useApi = () => {
       user: {
         info: () => axios('/admin/user', { method: 'get' }),
       },
+      users: {
+        list: () => axios('/admin/users', { method: 'get' }),
+        one: (id) => axios(`/admin/users/${id}`, { method: 'get' }),
+      },
       isAxiosError,
     };
   }

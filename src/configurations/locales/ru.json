@@ -3,10 +3,22 @@
     "title_template": "%s - Depot"
   },
   "labels": {
+    "categories": "Категории",
+    "created_date": "Дата создания",
     "dashboard": "Панель управления",
-    "users": "Пользователи",
+    "email": "Email",
+    "first_name": "Имя",
+    "last_name": "Фамилия",
+    "loading_with_dots": "Загрузка...",
+    "middle_name": "Отчество",
     "roles": "Роли",
-    "categories": "Категории"
+    "type": "Тип",
+    "updated_date": "Дата изменения",
+    "users": "Пользователи",
+    "user_account_types": {
+      "regular": "Обычный",
+      "employee": "Сотрудник"
+    }
   },
   "pages": {
     "authentication": {
