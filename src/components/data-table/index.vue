@@ -58,6 +58,7 @@ const props = withDefaults(
 <style module lang="scss">
 .data-table {
   width: 100%;
+  overflow-x: auto;
 
   &__table {
     width: 100%;

@@ -68,6 +68,7 @@ watch(
   align-items: center;
   border-block-end: 1px solid $color-border;
   background: $color-white;
+  z-index: $z-index-menu;
 
   &__logo {
     padding: 0.5rem;
@@ -82,7 +83,7 @@ watch(
       position: fixed;
       inset-block-start: $app-menu-mobile-height;
       inset-block-end: 0;
-      inset-inline-start: 0;
+      inset-inline: 0;
       background: $color-inherit;
     }
 
