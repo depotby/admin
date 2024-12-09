@@ -9,6 +9,14 @@ const routes: RouteRecordRaw[] = [
       layout: 'default',
     },
   },
+  {
+    path: '/roles/:id',
+    name: 'roles-id',
+    component: () => import('@/pages/roles/[id].vue'),
+    meta: {
+      layout: 'default',
+    },
+  },
 ];
 
 export default routes;

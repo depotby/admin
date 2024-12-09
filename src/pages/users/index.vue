@@ -19,12 +19,12 @@ const { formatDate } = useDateFormatter();
 
 const loading = ref(false);
 const pagination = ref<Pagination>({
-  limit: 50,
+  limit: 0,
   page: 1,
   pages: 1,
   count: 0,
 });
-const items = ref<ListUser[]>([]);
+const roles = ref<ListUser[]>([]);
 
 const columns = computed<DataTableColumn[]>(() => [
   {
@@ -53,8 +53,8 @@ const columns = computed<DataTableColumn[]>(() => [
   },
 ]);
 
-const formattedItems = computed<DataTableItem[]>(() =>
-  items.value.map(
+const formattedRoles = computed<DataTableItem[]>(() =>
+  roles.value.map(
     (item): DataTableItem => ({
       ...item,
       account_type: t(`labels.user_account_types.${item.account_type}`),
@@ -73,10 +73,10 @@ const loadUsers = async () => {
   loading.value = true;
   try {
     const {
-      data: { items: users, ...receivedPagination },
+      data: { items, ...receivedPagination },
     } = await api.users.list();
     pagination.value = receivedPagination;
-    items.value = users;
+    roles.value = items;
   } catch {}
   loading.value = false;
 };
@@ -89,7 +89,7 @@ useHead(() => ({
 </script>
 
 <template>
-  <DataTable :columns :pagination :items="formattedItems" />
+  <DataTable :columns :pagination :items="formattedRoles" />
 </template>
 
 <style module lang="scss"></style>
