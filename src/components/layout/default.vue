@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppMenu from '@/components/app/menu.vue';
+import AppModal from '@/components/app/modal.vue';
 </script>
 
 <template>
@@ -9,6 +10,8 @@ import AppMenu from '@/components/app/menu.vue';
     <div :class="$style['layout-default__main']">
       <slot />
     </div>
+
+    <AppModal />
   </div>
 </template>
 
