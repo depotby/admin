@@ -5,6 +5,9 @@ import { useI18n } from 'vue-i18n';
 import { useHead } from '@unhead/vue';
 import { useApi } from '@/composables/use-api.ts';
 import { useDateFormatter } from '@/composables/use-date-formatter.ts';
+import UiText from '@/components/ui/text.vue';
+import UiButton from '@/components/ui/button.vue';
+import UiIcon from '@/components/ui/icon.vue';
 import DataTable, {
   type DataTableColumn,
   type DataTableItem,
@@ -73,7 +76,31 @@ useHead(() => ({
 </script>
 
 <template>
-  <DataTable :columns :pagination :items="formattedRoles" />
+  <div :class="$style['page-roles']">
+    <div :class="$style['page-roles__header']">
+      <UiText variant="h2">
+        {{ $t('labels.roles') }}
+      </UiText>
+
+      <UiButton :to="{ name: 'roles-new' }" size="medium-compact">
+        <UiIcon name="add-2-rounded" color="color-inherit" />
+      </UiButton>
+    </div>
+
+    <DataTable :columns :pagination :items="formattedRoles" />
+  </div>
 </template>
 
-<style module lang="scss"></style>
+<style module lang="scss">
+.page-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+</style>
