@@ -2,6 +2,7 @@ export type Icon =
   | 'add-2-rounded'
   | 'category-rounded'
   | 'chevron-left-rounded'
+  | 'close-rounded'
   | 'dashboard-rounded'
   | 'delete-rounded'
   | 'enterprise'
