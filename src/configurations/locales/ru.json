@@ -22,6 +22,9 @@
       "regular": "Обычный"
     }
   },
+  "actions": {
+    "save": "Сохранить"
+  },
   "pages": {
     "authentication": {
       "sign_in": {
@@ -55,6 +58,18 @@
     "roles": {
       "meta": {
         "title": "Роли"
+      },
+      "new": {
+        "meta": {
+          "title": "Новая роль"
+        },
+        "title": "Новая роль",
+        "form": {
+          "name": {
+            "label": "Название",
+            "placeholder": "Менеджер"
+          }
+        }
       }
     },
     "users": {
