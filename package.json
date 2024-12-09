@@ -16,6 +16,7 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write .",
+    "code:fix": "pnpm lint && pnpm format",
     "generate:sprites": "tsx utils/sprites-generator.ts"
   },
   "dependencies": {

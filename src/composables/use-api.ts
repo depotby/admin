@@ -25,6 +25,9 @@ export const useApi = () => {
       roles: {
         list: () => axios('/admin/roles', { method: 'get' }),
         one: (id) => axios(`/admin/roles/${id}`, { method: 'get' }),
+        create: (data) => axios('/admin/roles', { method: 'post', data }),
+        update: (id, data) => axios(`/admin/roles/${id}`, { method: 'put', data }),
+        destroy: (id) => axios(`/admin/roles/${id}`, { method: 'delete' }),
       },
       isAxiosError,
     };

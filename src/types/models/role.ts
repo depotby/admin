@@ -5,6 +5,12 @@ export interface UserRole {
   name: string;
 }
 
+export interface RoleData {
+  role: {
+    name: string;
+  };
+}
+
 export interface ListRole {
   id: string;
   name: string;

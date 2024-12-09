@@ -6,7 +6,7 @@ import type {
 } from '@/types/models/authentication.ts';
 import type { ExtendedListUser, ListUser, User } from '@/types/models/user.ts';
 import type { PaginatedResponse } from '@/types/common.ts';
-import type { ExtendedListRole, ListRole } from '@/types/models/role.ts';
+import type { ExtendedListRole, ListRole, RoleData } from '@/types/models/role.ts';
 
 type Response<T> = Promise<AxiosResponse<T>>;
 
@@ -25,6 +25,9 @@ export interface Api {
   roles: {
     list: () => Response<PaginatedResponse<ListRole>>;
     one: (id: string) => Response<ExtendedListRole>;
+    create: (data: RoleData) => Response<ExtendedListRole>;
+    update: (id: string, data: RoleData) => Response<ExtendedListRole>;
+    destroy: (id: string) => Response<void>;
   };
   isAxiosError: typeof isAxiosError;
 }
