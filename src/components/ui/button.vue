@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCssModule, computed } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, type RouterLinkProps } from 'vue-router';
 import UiIcon from '@/components/ui/icon.vue';
 import type { ElementColor } from '@/types/assets/colors';
 
@@ -10,7 +10,7 @@ interface Props {
   variant?: 'default' | 'outlined' | 'text';
   color?: ElementColor;
   size?: 'small' | 'small-compact' | 'medium' | 'medium-compact' | 'large' | 'large-compact';
-  to?: string;
+  to?: RouterLinkProps['to'] | string;
   target?: '_self' | '_blank' | '_parent' | '_top';
   type?: 'button' | 'submit' | 'reset';
   loading?: boolean;
