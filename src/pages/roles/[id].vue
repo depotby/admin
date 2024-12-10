@@ -3,15 +3,17 @@ import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHead } from '@unhead/vue';
 import { useApi } from '@/composables/use-api.ts';
+import { useModal, ModalName } from '@/composables/use-modal.ts';
+import { useRole } from '@/composables/use-role.ts';
 import UiText from '@/components/ui/text.vue';
 import UiButton from '@/components/ui/button.vue';
 import UiIcon from '@/components/ui/icon.vue';
 import type { ExtendedListRole } from '@/types/models/role.ts';
-import { useRole } from '@/composables/use-role.ts';
 import type { AbilityName } from '@/types/models/ability.ts';
 
 const route = useRoute();
 const api = useApi();
+const { open } = useModal();
 
 const loading = ref(false);
 const role = ref<ExtendedListRole>();
@@ -29,6 +31,12 @@ const loadRole = async () => {
     role.value = data;
   } catch {}
   loading.value = false;
+};
+
+const openDeleteModal = () => {
+  if (!role.value) return;
+
+  open(ModalName.DELETE_ROLE, { role: role.value });
 };
 
 const switchAbility = (ability: AbilityName) => {
@@ -59,9 +67,15 @@ useHead(() => ({
 
 <template>
   <div :class="$style['page-roles-id']">
-    <UiText variant="h3">
-      {{ role?.name }}
-    </UiText>
+    <div :class="$style['page-roles-id__header']">
+      <UiText variant="h3">
+        {{ role?.name }}
+      </UiText>
+
+      <UiButton color="color-red" variant="outlined" size="medium-compact" @click="openDeleteModal">
+        <UiIcon name="delete-rounded" color="color-inherit" />
+      </UiButton>
+    </div>
 
     <div :class="$style['page-roles-id__abilities']">
       <div
@@ -143,6 +157,16 @@ useHead(() => ({
 
 <style module lang="scss">
 .page-roles-id {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &__abilities {
     &__group {
       $group-class: &;

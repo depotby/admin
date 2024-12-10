@@ -48,7 +48,7 @@ watch(
         @click="close"
       />
 
-      <component :is="modalComponent" />
+      <component :is="modalComponent" v-bind="state.props" />
     </div>
   </dialog>
 </template>
