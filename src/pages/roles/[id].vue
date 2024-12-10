@@ -39,15 +39,15 @@ const openDeleteModal = () => {
   open(ModalName.DELETE_ROLE, { role: role.value });
 };
 
-const switchAbility = (ability: AbilityName) => {
-  // if (loading.value) return;
-  //
-  // loading.value = true;
-  // try {
-  console.log(ability);
-  throw new Error('Not implemented');
-  // } catch {}
-  // loading.value = false;
+const switchAbility = async (ability: AbilityName) => {
+  if (loading.value || !role.value) return;
+
+  loading.value = true;
+  try {
+    const { data } = await api.roles.switch_ability(role.value.id, ability);
+    role.value = data;
+  } catch {}
+  loading.value = false;
 };
 
 const switchGroup = (group: string) => {
@@ -72,7 +72,13 @@ useHead(() => ({
         {{ role?.name }}
       </UiText>
 
-      <UiButton color="color-red" variant="outlined" size="medium-compact" @click="openDeleteModal">
+      <UiButton
+        :disabled="loading"
+        color="color-red"
+        variant="outlined"
+        size="medium-compact"
+        @click="openDeleteModal"
+      >
         <UiIcon name="delete-rounded" color="color-inherit" />
       </UiButton>
     </div>
@@ -108,6 +114,7 @@ useHead(() => ({
                 v-for="ability in group.abilities"
                 :key="ability.name"
                 :variant="ability.active ? 'default' : 'outlined'"
+                :disabled="loading"
                 size="large-compact"
                 @click.stop="() => switchAbility(ability.key)"
               >
@@ -141,6 +148,7 @@ useHead(() => ({
                   v-for="ability in subgroup.abilities"
                   :key="ability.name"
                   :variant="ability.active ? 'default' : 'outlined'"
+                  :disabled="loading"
                   size="large-compact"
                   @click.stop="() => switchAbility(ability.key)"
                 >

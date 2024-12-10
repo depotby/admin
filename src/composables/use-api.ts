@@ -28,6 +28,8 @@ export const useApi = () => {
         create: (data) => axios('/admin/roles', { method: 'post', data }),
         update: (id, data) => axios(`/admin/roles/${id}`, { method: 'put', data }),
         destroy: (id) => axios(`/admin/roles/${id}`, { method: 'delete' }),
+        switch_ability: (id, ability) =>
+          axios(`/admin/roles/${id}/abilities`, { method: 'post', data: { ability } }),
       },
       isAxiosError,
     };
