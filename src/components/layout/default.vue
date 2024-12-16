@@ -30,8 +30,7 @@ import AppModal from '@/components/app/modal.vue';
   }
 
   &__main {
-    padding-block-start: calc($app-menu-mobile-height + 1rem);
-    padding-inline: 1rem;
+    padding: calc($app-menu-mobile-height + 1rem) 1rem 1rem;
   }
 
   @include media-query-desktop {
@@ -42,8 +41,7 @@ import AppModal from '@/components/app/modal.vue';
     }
 
     &__main {
-      padding-block-start: 1rem;
-      padding-inline: calc($app-menu-desktop-width + 1rem) 1rem;
+      padding: 1rem 1rem 1rem calc($app-menu-desktop-width + 1rem);
     }
   }
 }
