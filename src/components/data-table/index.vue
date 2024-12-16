@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Pagination } from '@/types/common.ts';
+import DataTablePagination from '@/components/data-table/pagination.vue';
 
 export interface DataTableItem {
   [key: string]: any;
@@ -16,11 +16,17 @@ export interface DataTableColumn {
 const props = withDefaults(
   defineProps<{
     columns: DataTableColumn[];
-    pagination: Pagination;
     items: DataTableItem[];
+    pages?: number;
+    loading?: boolean;
   }>(),
-  {},
+  {
+    pages: 1,
+    loading: false,
+  },
 );
+
+const page = defineModel<number>('page');
 </script>
 
 <template>
@@ -52,6 +58,13 @@ const props = withDefaults(
         </tr>
       </tbody>
     </table>
+
+    <DataTablePagination
+      v-if="page && props.pages > 1"
+      v-model="page"
+      :pages="props.pages"
+      :class="$style['data-table__pagination']"
+    />
   </div>
 </template>
 
@@ -59,6 +72,8 @@ const props = withDefaults(
 .data-table {
   width: 100%;
   overflow-x: auto;
+  display: flex;
+  flex-direction: column;
 
   &__table {
     width: 100%;
@@ -109,6 +124,10 @@ const props = withDefaults(
         inset: 0;
       }
     }
+  }
+
+  &__pagination {
+    align-self: center;
   }
 }
 </style>
