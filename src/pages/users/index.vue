@@ -75,11 +75,16 @@ const loadUsers = async () => {
   try {
     const {
       data: { items, ...receivedPagination },
-    } = await api.users.list();
+    } = await api.users.list({ page: pagination.value.page });
     pagination.value = receivedPagination;
     roles.value = items;
   } catch {}
   loading.value = false;
+};
+
+const changePage = (page: number) => {
+  pagination.value.page = page;
+  loadUsers();
 };
 
 loadUsers();
@@ -95,7 +100,14 @@ useHead(() => ({
       {{ $t('labels.users') }}
     </UiText>
 
-    <DataTable :columns :pagination :items="formattedRoles" />
+    <DataTable
+      :columns
+      :pagination
+      :items="formattedRoles"
+      :pages="pagination.pages"
+      :page="pagination.page"
+      @update:page="changePage"
+    />
   </div>
 </template>
 

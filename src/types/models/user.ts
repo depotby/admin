@@ -1,5 +1,6 @@
 import type { AbilityName } from '@/types/models/ability.ts';
 import type { UserRole } from '@/types/models/role.ts';
+import type { BasePagination } from '@/types/common.ts';
 
 export enum UserAccountType {
   regular = 'regular',
@@ -17,6 +18,8 @@ export interface User {
   updated_at: string;
   abilities: AbilityName[];
 }
+
+export type ListUsersParams = BasePagination;
 
 export interface ListUser {
   id: string;

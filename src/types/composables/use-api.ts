@@ -4,7 +4,7 @@ import type {
   AuthenticationResponseData,
   RefreshData,
 } from '@/types/models/authentication.ts';
-import type { ExtendedListUser, ListUser, User } from '@/types/models/user.ts';
+import type { ExtendedListUser, ListUser, ListUsersParams, User } from '@/types/models/user.ts';
 import type { PaginatedResponse } from '@/types/common.ts';
 import type { ExtendedListRole, ListRole, RoleData } from '@/types/models/role.ts';
 import type { AbilityName } from '@/types/models/ability.ts';
@@ -20,7 +20,7 @@ export interface Api {
     info: () => Response<User>;
   };
   users: {
-    list: () => Response<PaginatedResponse<ListUser>>;
+    list: (params: ListUsersParams) => Response<PaginatedResponse<ListUser>>;
     one: (id: string) => Response<ExtendedListUser>;
   };
   roles: {

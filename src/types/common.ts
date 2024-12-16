@@ -8,3 +8,7 @@ export interface Pagination {
 export interface PaginatedResponse<T> extends Pagination {
   items: T[];
 }
+
+export interface BasePagination {
+  page?: number;
+}

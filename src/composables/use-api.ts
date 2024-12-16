@@ -19,7 +19,7 @@ export const useApi = () => {
         info: () => axios('/admin/user', { method: 'get' }),
       },
       users: {
-        list: () => axios('/admin/users', { method: 'get' }),
+        list: (params) => axios('/admin/users', { method: 'get', params }),
         one: (id) => axios(`/admin/users/${id}`, { method: 'get' }),
       },
       roles: {
