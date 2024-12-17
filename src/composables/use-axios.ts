@@ -34,8 +34,8 @@ export const useAxios = () => {
           if (!refresh)
             refresh = userStore
               .refreshTokens()
-              .catch(() => {
-                userStore.updateTokens();
+              .catch(async () => {
+                await userStore.signOut(true);
               })
               .finally(() => {
                 refresh = undefined;

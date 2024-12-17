@@ -14,6 +14,7 @@ export const useApi = () => {
           axios('/admin/authentications', { method: 'post', data, __noRefresh: true }),
         refresh: (data) =>
           axios('/admin/authentications', { method: 'put', data, __noRefresh: true }),
+        destroy: () => axios('/admin/authentications', { method: 'delete' }),
       },
       user: {
         info: () => axios('/admin/user', { method: 'get' }),

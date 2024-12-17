@@ -16,6 +16,7 @@ export interface Api {
   authentications: {
     create: (data: AuthenticationCreateData) => Response<AuthenticationResponseData>;
     refresh: (data: RefreshData) => Response<AuthenticationResponseData>;
+    destroy: () => Response<void>;
   };
   user: {
     info: () => Response<User>;

@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
+import router from '@/configurations/router.ts';
 import { useApi } from '@/composables/use-api.ts';
 import type { User } from '@/types/models/user.ts';
 import type { AuthenticationCreateData } from '@/types/models/authentication.ts';
@@ -24,6 +25,8 @@ export const useUserStore = defineStore('user', () => {
       localStorage.setItem(ACCESS_TOKEN_KEY, access);
       localStorage.setItem(REFRESH_TOKEN_KEY, refresh);
     } else {
+      access_token.value = null;
+      refresh_token.value = null;
       localStorage.removeItem(ACCESS_TOKEN_KEY);
       localStorage.removeItem(REFRESH_TOKEN_KEY);
     }
@@ -52,6 +55,13 @@ export const useUserStore = defineStore('user', () => {
     await loadUser();
   };
 
+  const signOut = async (skipRequest = false) => {
+    if (!skipRequest) await api.authentications.destroy();
+
+    updateTokens();
+    await router.push({ name: 'authentication-sign-in' });
+  };
+
   return {
     access_token,
     refresh_token,
@@ -62,5 +72,6 @@ export const useUserStore = defineStore('user', () => {
     refreshTokens,
     loadUser,
     autologin,
+    signOut,
   };
 });
