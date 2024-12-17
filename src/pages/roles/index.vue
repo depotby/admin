@@ -42,7 +42,10 @@ const columns = computed<DataTableColumn[]>(() => [
     name: 'updated_at',
     text: t('labels.updated_date'),
   },
-]);
+].map(column => ({
+  ...column,
+  orderable: false,
+})));
 const formattedRoles = computed<DataTableItem[]>(() =>
   roles.value.map((item) => ({
     ...item,

@@ -12,3 +12,10 @@ export interface PaginatedResponse<T> extends Pagination {
 export interface BasePagination {
   page?: number;
 }
+
+export type OrderDirection = 'asc' | 'desc';
+
+export interface BaseOrder {
+  order_param?: string;
+  order_direction?: OrderDirection;
+}

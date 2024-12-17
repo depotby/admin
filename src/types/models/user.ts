@@ -1,6 +1,6 @@
 import type { AbilityName } from '@/types/models/ability.ts';
 import type { UserRole } from '@/types/models/role.ts';
-import type { BasePagination } from '@/types/common.ts';
+import type { BaseOrder, BasePagination } from '@/types/common.ts';
 
 export enum UserAccountType {
   regular = 'regular',
@@ -19,7 +19,9 @@ export interface User {
   abilities: AbilityName[];
 }
 
-export type ListUsersParams = BasePagination;
+export interface ListUsersParams extends BasePagination, BaseOrder {
+  order_param?: 'email' | 'first_name' | 'last_name' | 'account_type' | 'created_at' | 'updated_at';
+}
 
 export interface ListUser {
   id: string;

@@ -4,55 +4,66 @@ import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useHead } from '@unhead/vue';
 import { useApi } from '@/composables/use-api.ts';
+import {
+  useDataTableOrder,
+  type UseDataTableOrderParams,
+} from '@/composables/use-data-table-order.ts';
+import { usePagination } from '@/composables/use-pagination.ts';
 import { useDateFormatter } from '@/composables/use-date-formatter.ts';
 import UiText from '@/components/ui/text.vue';
 import DataTable, {
   type DataTableColumn,
   type DataTableItem,
 } from '@/components/data-table/index.vue';
-import type { ListUser } from '@/types/models/user.ts';
-import type { Pagination } from '@/types/common.ts';
+import type { ListUser, ListUsersParams } from '@/types/models/user.ts';
+
+const dataTableOrderParams: UseDataTableOrderParams = {
+  default: { param: 'created_at', direction: 'desc' },
+  availableParams: ['email', 'first_name', 'last_name', 'account_type', 'created_at', 'updated_at'],
+};
 
 const router = useRouter();
 const { t } = useI18n();
 const api = useApi();
+const { pagination, changePage } = usePagination();
+const { order, changeOrder } = useDataTableOrder(dataTableOrderParams, pagination);
+
 const { formatDate } = useDateFormatter();
 
 const loading = ref(false);
-const pagination = ref<Pagination>({
-  limit: 0,
-  page: 1,
-  pages: 1,
-  count: 0,
-});
 const roles = ref<ListUser[]>([]);
 
-const columns = computed<DataTableColumn[]>(() => [
-  {
-    name: 'email',
-    text: t('labels.email'),
-  },
-  {
-    name: 'first_name',
-    text: t('labels.first_name'),
-  },
-  {
-    name: 'last_name',
-    text: t('labels.last_name'),
-  },
-  {
-    name: 'account_type',
-    text: t('labels.type'),
-  },
-  {
-    name: 'created_at',
-    text: t('labels.created_date'),
-  },
-  {
-    name: 'updated_at',
-    text: t('labels.updated_date'),
-  },
-]);
+const columns = computed<DataTableColumn[]>(() =>
+  [
+    {
+      name: 'email',
+      text: t('labels.email'),
+    },
+    {
+      name: 'first_name',
+      text: t('labels.first_name'),
+    },
+    {
+      name: 'last_name',
+      text: t('labels.last_name'),
+    },
+    {
+      name: 'account_type',
+      text: t('labels.type'),
+    },
+    {
+      name: 'created_at',
+      text: t('labels.created_date'),
+    },
+    {
+      name: 'updated_at',
+      text: t('labels.updated_date'),
+    },
+  ].map((column) => ({
+    ...column,
+    orderable: dataTableOrderParams.availableParams.includes(column.name),
+  })),
+);
 
 const formattedRoles = computed<DataTableItem[]>(() =>
   roles.value.map(
@@ -75,16 +86,15 @@ const loadUsers = async () => {
   try {
     const {
       data: { items, ...receivedPagination },
-    } = await api.users.list({ page: pagination.value.page });
+    } = await api.users.list({
+      page: pagination.value.page,
+      order_param: order.value.name as ListUsersParams['order_param'],
+      order_direction: order.value.direction,
+    });
     pagination.value = receivedPagination;
     roles.value = items;
   } catch {}
   loading.value = false;
-};
-
-const changePage = (page: number) => {
-  pagination.value.page = page;
-  loadUsers();
 };
 
 loadUsers();
@@ -102,11 +112,13 @@ useHead(() => ({
 
     <DataTable
       :columns
+      :order
       :pagination
       :items="formattedRoles"
       :pages="pagination.pages"
       :page="pagination.page"
-      @update:page="changePage"
+      @update:order="(event) => changeOrder(event, loadUsers)"
+      @update:page="(event) => changePage(event, loadUsers)"
     />
   </div>
 </template>

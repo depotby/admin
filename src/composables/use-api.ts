@@ -31,6 +31,10 @@ export const useApi = () => {
         switch_ability: (id, ability) =>
           axios(`/admin/roles/${id}/abilities`, { method: 'post', data: { ability } }),
       },
+      categories: {
+        list: () => axios('/admin/categories', { method: 'get' }),
+        one: (id) => axios(`/admin/categories/${id}`, { method: 'get' }),
+      },
       isAxiosError,
     };
   }

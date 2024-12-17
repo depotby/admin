@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import UiIcon from '@/components/ui/icon.vue';
 import DataTablePagination from '@/components/data-table/pagination.vue';
+
+export interface DataTableOrder {
+  name: string;
+  direction: 'asc' | 'desc';
+}
 
 export interface DataTableItem {
   [key: string]: any;
@@ -11,6 +18,12 @@ export interface DataTableItem {
 export interface DataTableColumn {
   name: string;
   text: string;
+  orderable: boolean;
+}
+
+interface DataTablePreparedColumn extends DataTableColumn {
+  orderActive: boolean;
+  orderIconRotation: 0 | 180;
 }
 
 const props = withDefaults(
@@ -26,7 +39,35 @@ const props = withDefaults(
   },
 );
 
+const order = defineModel<DataTableOrder>('order');
 const page = defineModel<number>('page');
+
+const preparedColumns = computed(() =>
+  props.columns.map(
+    (column): DataTablePreparedColumn => ({
+      ...column,
+      orderActive: order.value?.name === column.name,
+      orderIconRotation:
+        order.value?.name === column.name && order.value.direction === 'desc' ? 180 : 0,
+    }),
+  ),
+);
+
+const changeOrder = (column: DataTablePreparedColumn) => {
+  if (!column.orderable) return;
+
+  if (column.name === order.value?.name) {
+    order.value = {
+      name: column.name,
+      direction: order.value.direction === 'asc' ? 'desc' : 'asc',
+    };
+  } else {
+    order.value = {
+      name: column.name,
+      direction: 'asc',
+    };
+  }
+};
 </script>
 
 <template>
@@ -34,8 +75,28 @@ const page = defineModel<number>('page');
     <table :class="$style['data-table__table']">
       <thead>
         <tr>
-          <th v-for="column in props.columns" :key="column.name">
-            {{ column.text }}
+          <th
+            v-for="column in preparedColumns"
+            :key="column.name"
+            :class="{
+              [$style['data-table__table__header']]: true,
+              [$style['data-table__table__header--orderable']]: column.orderable,
+            }"
+            @click="() => changeOrder(column)"
+          >
+            <div>
+              {{ column.text }}
+
+              <UiIcon
+                v-if="column.orderable"
+                :name="'arrow-downward-alt-rounded'"
+                :rotate="column.orderIconRotation"
+                :class="{
+                  [$style['data-table__table__order']]: true,
+                  [$style['data-table__table__order--active']]: column.orderActive,
+                }"
+              />
+            </div>
           </th>
         </tr>
       </thead>
@@ -76,6 +137,8 @@ const page = defineModel<number>('page');
   flex-direction: column;
 
   &__table {
+    $table-class: &;
+
     width: 100%;
     border-collapse: collapse;
 
@@ -93,6 +156,40 @@ const page = defineModel<number>('page');
 
           &:last-of-type {
             border-start-end-radius: 0.5rem;
+          }
+
+          &#{$table-class} {
+            &__header {
+              > div {
+                display: flex;
+                align-items: center;
+              }
+
+              &--orderable {
+                cursor: pointer;
+              }
+
+              #{$table-class} {
+                &__order {
+                  color: $color-transparent;
+                  transition-property: color, transform;
+                  transition-duration: $duration-medium;
+                  transition-timing-function: ease-in-out;
+
+                  &--active {
+                    color: $color-black;
+                  }
+                }
+              }
+
+              &:hover {
+                #{$table-class} {
+                  &__order {
+                    color: $color-gray;
+                  }
+                }
+              }
+            }
           }
         }
       }
