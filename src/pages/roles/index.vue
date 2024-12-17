@@ -29,23 +29,25 @@ const pagination = ref<Pagination>({
 });
 const roles = ref<ListRole[]>([]);
 
-const columns = computed<DataTableColumn[]>(() => [
-  {
-    name: 'name',
-    text: t('labels.name'),
-  },
-  {
-    name: 'created_at',
-    text: t('labels.created_date'),
-  },
-  {
-    name: 'updated_at',
-    text: t('labels.updated_date'),
-  },
-].map(column => ({
-  ...column,
-  orderable: false,
-})));
+const columns = computed<DataTableColumn[]>(() =>
+  [
+    {
+      name: 'name',
+      text: t('labels.name'),
+    },
+    {
+      name: 'created_at',
+      text: t('labels.created_date'),
+    },
+    {
+      name: 'updated_at',
+      text: t('labels.updated_date'),
+    },
+  ].map((column) => ({
+    ...column,
+    orderable: false,
+  })),
+);
 const formattedRoles = computed<DataTableItem[]>(() =>
   roles.value.map((item) => ({
     ...item,
