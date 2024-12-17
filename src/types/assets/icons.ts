@@ -1,5 +1,7 @@
 export type Icon =
   | 'add-2-rounded'
+  | 'arrow-downward-alt-rounded'
+  | 'arrow-upward-alt-rounded'
   | 'category-rounded'
   | 'chevron-left-rounded'
   | 'close-rounded'
