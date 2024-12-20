@@ -9,6 +9,14 @@ const routes: RouteRecordRaw[] = [
       layout: 'default',
     },
   },
+  {
+    path: '/categories/:id',
+    name: 'categories-id',
+    component: () => import('@/pages/categories/[id].vue'),
+    meta: {
+      layout: 'default',
+    },
+  },
 ];
 
 export default routes;
