@@ -8,7 +8,7 @@ interface RoleGroup {
   name: string;
   text: string;
   abilities: { name: AbilityType; key: AbilityName; icon: Icon; active: boolean }[];
-  subGroups?: Omit<RoleGroup, 'subGroups'>[];
+  subGroups: Omit<RoleGroup, 'subGroups'>[];
 }
 
 const icons: Record<AbilityType, Icon> = {
@@ -36,6 +36,18 @@ export const useRole = (role: Ref<ExtendedListRole | undefined>) => {
             key: AbilityName.USER_UPDATE,
           },
         ],
+        subGroups: [
+          {
+            name: 'user_type',
+            text: t('labels.type'),
+            abilities: [
+              {
+                name: AbilityType.UPDATE,
+                key: AbilityName.USER_TYPE_UPDATE,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'role',
@@ -58,6 +70,7 @@ export const useRole = (role: Ref<ExtendedListRole | undefined>) => {
             key: AbilityName.ROLE_DELETE,
           },
         ],
+        subGroups: [],
       },
       {
         name: 'category',
@@ -80,30 +93,7 @@ export const useRole = (role: Ref<ExtendedListRole | undefined>) => {
             key: AbilityName.CATEGORY_DELETE,
           },
         ],
-        subGroups: [
-          {
-            name: 'category_property',
-            text: t('labels.category_properties'),
-            abilities: [
-              {
-                name: AbilityType.CREATE,
-                key: AbilityName.CATEGORY_PROPERTY_CREATE,
-              },
-              {
-                name: AbilityType.READ,
-                key: AbilityName.CATEGORY_PROPERTY_READ,
-              },
-              {
-                name: AbilityType.UPDATE,
-                key: AbilityName.CATEGORY_PROPERTY_UPDATE,
-              },
-              {
-                name: AbilityType.DELETE,
-                key: AbilityName.CATEGORY_PROPERTY_DELETE,
-              },
-            ],
-          },
-        ],
+        subGroups: [],
       },
     ].map(
       (group): RoleGroup => ({
@@ -113,7 +103,7 @@ export const useRole = (role: Ref<ExtendedListRole | undefined>) => {
           icon: icons[ability.name],
           active: role.value?.abilities.includes(ability.key) ?? false,
         })),
-        subGroups: group.subGroups?.map((subGroup) => ({
+        subGroups: group.subGroups.map((subGroup) => ({
           ...subGroup,
           abilities: subGroup.abilities.map((ability) => ({
             ...ability,

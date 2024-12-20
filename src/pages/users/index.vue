@@ -27,7 +27,6 @@ const { t } = useI18n();
 const api = useApi();
 const { pagination, changePage } = usePagination();
 const { order, changeOrder } = useDataTableOrder(dataTableOrderParams, pagination);
-
 const { formatDate } = useDateFormatter();
 
 const loading = ref(false);

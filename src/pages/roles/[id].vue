@@ -96,7 +96,7 @@ useHead(() => ({
           <div :class="$style['page-roles-id__abilities__group__head__start']">
             <div :class="$style['page-roles-id__abilities__group__head__start__button']">
               <UiIcon
-                v-if="group.subGroups"
+                v-if="group.subGroups.length"
                 :rotate="opened_groups.has(group.name) ? 90 : 270"
                 name="chevron-left-rounded"
                 rotate-transition
@@ -125,7 +125,7 @@ useHead(() => ({
         </div>
 
         <div
-          v-if="group.subGroups"
+          v-if="group.subGroups.length"
           :class="{
             [$style['page-roles-id__abilities__group__subgroups']]: true,
             [$style['page-roles-id__abilities__group__subgroups--active']]: opened_groups.has(
