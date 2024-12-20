@@ -13,7 +13,7 @@ export const useApi = () => {
         create: (data) =>
           axios('/admin/authentications', { method: 'post', data, __noRefresh: true }),
         refresh: (data) =>
-          axios('/admin/authentications', { method: 'put', data, __noRefresh: true }),
+          axios('/admin/authentications/refresh', { method: 'post', data, __noRefresh: true }),
         destroy: () => axios('/admin/authentications', { method: 'delete' }),
       },
       user: {
