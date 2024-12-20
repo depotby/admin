@@ -29,7 +29,7 @@ export const useDataTableOrder = (params: UseDataTableOrderParams, pagination: R
 
   const changeOrder = async (value: DataTableOrder, callback?: () => Promise<unknown>) => {
     await router.replace({
-      name: 'users',
+      name: route.name,
       query: { ...route.query, page: 1, order_param: value.name, order_direction: value.direction },
     });
     pagination.value.page = 1;

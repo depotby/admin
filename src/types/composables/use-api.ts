@@ -8,7 +8,7 @@ import type { ExtendedListUser, ListUser, ListUsersParams, User } from '@/types/
 import type { PaginatedResponse } from '@/types/common.ts';
 import type { ExtendedListRole, ListRole, RoleData } from '@/types/models/role.ts';
 import type { AbilityName } from '@/types/models/ability.ts';
-import type { ListCategory } from '@/types/models/category.ts';
+import type { ListCategoriesParams, ListCategory } from '@/types/models/category.ts';
 
 type Response<T> = Promise<AxiosResponse<T>>;
 
@@ -22,7 +22,7 @@ export interface Api {
     info: () => Response<User>;
   };
   users: {
-    list: (params: ListUsersParams) => Response<PaginatedResponse<ListUser>>;
+    list: (params?: ListUsersParams) => Response<PaginatedResponse<ListUser>>;
     one: (id: string) => Response<ExtendedListUser>;
   };
   roles: {
@@ -34,7 +34,7 @@ export interface Api {
     switch_ability: (id: string, ability: AbilityName) => Response<ExtendedListRole>;
   };
   categories: {
-    list: () => Response<PaginatedResponse<ListCategory>>;
+    list: (params?: ListCategoriesParams) => Response<PaginatedResponse<ListCategory>>;
     one: (id: string) => Response<ListCategory>;
   };
   isAxiosError: typeof isAxiosError;

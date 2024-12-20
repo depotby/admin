@@ -14,7 +14,7 @@ export const usePagination = () => {
   });
 
   const changePage = async (page: number, callback?: () => Promise<unknown>) => {
-    await router.replace({ name: 'users', query: { ...route.query, page } });
+    await router.replace({ name: route.name, query: { ...route.query, page } });
     pagination.value.page = page;
     if (callback) await callback();
   };

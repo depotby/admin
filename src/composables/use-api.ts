@@ -33,7 +33,7 @@ export const useApi = () => {
           axios(`/admin/roles/${id}/abilities`, { method: 'post', data: { ability } }),
       },
       categories: {
-        list: () => axios('/admin/categories', { method: 'get' }),
+        list: (params) => axios('/admin/categories', { method: 'get', params }),
         one: (id) => axios(`/admin/categories/${id}`, { method: 'get' }),
       },
       isAxiosError,
