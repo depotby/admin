@@ -33,6 +33,12 @@ router.beforeEach((to) => {
       name: 'authentication-sign-in',
     };
   }
+
+  if (to.meta.ability && !userStore.hasAbility(to.meta.ability)) {
+    return {
+      name: 'index',
+    };
+  }
 });
 
 export default router;

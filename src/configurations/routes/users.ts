@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
+import { AbilityName } from '@/types/models/ability.ts';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -7,6 +8,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/users/index.vue'),
     meta: {
       layout: 'default',
+      ability: AbilityName.USER_READ,
     },
   },
   {
@@ -15,6 +17,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/users/[id].vue'),
     meta: {
       layout: 'default',
+      ability: AbilityName.USER_READ,
     },
   },
 ];
