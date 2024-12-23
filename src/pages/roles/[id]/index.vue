@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue';
 import { useApi } from '@/composables/use-api.ts';
 import { useModal, ModalName } from '@/composables/use-modal.ts';
 import { useRole } from '@/composables/use-role.ts';
+import { useUserStore } from '@/stores/user.ts';
 import UiText from '@/components/ui/text.vue';
 import UiButton from '@/components/ui/button.vue';
 import UiIcon from '@/components/ui/icon.vue';
+import { AbilityName } from '@/types/models/ability.ts';
 import type { ExtendedListRole } from '@/types/models/role.ts';
-import type { AbilityName } from '@/types/models/ability.ts';
 
 const route = useRoute();
+const router = useRouter();
 const api = useApi();
 const { open } = useModal();
+const userStore = useUserStore();
 
 const loading = ref(false);
 const role = ref<ExtendedListRole>();
@@ -21,6 +24,13 @@ const opened_groups = ref<Set<string>>(new Set());
 
 const { abilitiesGroups } = useRole(role);
 const roleId = computed(() => route.params.id as string);
+const canEdit = computed(() => userStore.hasAbility(AbilityName.ROLE_UPDATE));
+const canDelete = computed(() => userStore.hasAbility(AbilityName.ROLE_DELETE));
+const editPath = computed(() =>
+  role.value
+    ? router.resolve({ name: 'roles-id-edit', params: { id: role.value.id } })
+    : route.fullPath,
+);
 
 const loadRole = async () => {
   if (loading.value) return;
@@ -40,7 +50,7 @@ const openDeleteModal = () => {
 };
 
 const switchAbility = async (ability: AbilityName) => {
-  if (loading.value || !role.value) return;
+  if (!canEdit.value || loading.value || !role.value) return;
 
   loading.value = true;
   try {
@@ -72,15 +82,29 @@ useHead(() => ({
         {{ role?.name }}
       </UiText>
 
-      <UiButton
-        :disabled="loading"
-        color="color-red"
-        variant="outlined"
-        size="medium-compact"
-        @click="openDeleteModal"
-      >
-        <UiIcon name="delete-rounded" color="color-inherit" />
-      </UiButton>
+      <div :class="$style['page-roles-id__header__actions']">
+        <UiButton
+          v-if="canEdit"
+          :to="editPath"
+          :disabled="loading"
+          color="color-blue"
+          variant="outlined"
+          size="medium-compact"
+        >
+          <UiIcon name="ink-pen-rounded" color="color-inherit" />
+        </UiButton>
+
+        <UiButton
+          v-if="canDelete"
+          :disabled="loading"
+          color="color-red"
+          variant="outlined"
+          size="medium-compact"
+          @click="openDeleteModal"
+        >
+          <UiIcon name="delete-rounded" color="color-inherit" />
+        </UiButton>
+      </div>
     </div>
 
     <div :class="$style['page-roles-id__abilities']">
@@ -114,7 +138,7 @@ useHead(() => ({
                 v-for="ability in group.abilities"
                 :key="ability.name"
                 :variant="ability.active ? 'default' : 'outlined'"
-                :disabled="loading"
+                :disabled="!canEdit || loading"
                 size="large-compact"
                 @click.stop="() => switchAbility(ability.key)"
               >
@@ -148,7 +172,7 @@ useHead(() => ({
                   v-for="ability in subgroup.abilities"
                   :key="ability.name"
                   :variant="ability.active ? 'default' : 'outlined'"
-                  :disabled="loading"
+                  :disabled="!canEdit || loading"
                   size="large-compact"
                   @click.stop="() => switchAbility(ability.key)"
                 >
@@ -173,6 +197,11 @@ useHead(() => ({
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &__actions {
+      display: flex;
+      gap: 0.5rem;
+    }
   }
 
   &__abilities {

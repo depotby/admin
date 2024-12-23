@@ -20,7 +20,15 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/roles/:id',
     name: 'roles-id',
-    component: () => import('@/pages/roles/[id].vue'),
+    component: () => import('@/pages/roles/[id]/index.vue'),
+    meta: {
+      layout: 'default',
+    },
+  },
+  {
+    path: '/roles/:id/edit',
+    name: 'roles-id-edit',
+    component: () => import('@/pages/roles/[id]/edit.vue'),
     meta: {
       layout: 'default',
     },

@@ -2,6 +2,7 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import router from '@/configurations/router.ts';
 import { useApi } from '@/composables/use-api.ts';
+import { AbilityName } from '@/types/models/ability.ts';
 import type { User } from '@/types/models/user.ts';
 import type { AuthenticationCreateData } from '@/types/models/authentication.ts';
 
@@ -62,6 +63,8 @@ export const useUserStore = defineStore('user', () => {
     await router.push({ name: 'authentication-sign-in' });
   };
 
+  const hasAbility = (name: AbilityName) => !!user.value?.abilities.includes(name);
+
   return {
     access_token,
     refresh_token,
@@ -73,5 +76,6 @@ export const useUserStore = defineStore('user', () => {
     loadUser,
     autologin,
     signOut,
+    hasAbility,
   };
 });

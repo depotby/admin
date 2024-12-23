@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { useHead } from '@unhead/vue';
 import { useApi } from '@/composables/use-api.ts';
 import { useDateFormatter } from '@/composables/use-date-formatter.ts';
+import { useUserStore } from '@/stores/user.ts';
 import UiText from '@/components/ui/text.vue';
 import UiButton from '@/components/ui/button.vue';
 import UiIcon from '@/components/ui/icon.vue';
@@ -12,6 +13,7 @@ import DataTable, {
   type DataTableColumn,
   type DataTableItem,
 } from '@/components/data-table/index.vue';
+import { AbilityName } from '@/types/models/ability.ts';
 import type { Pagination } from '@/types/common.ts';
 import type { ListRole } from '@/types/models/role.ts';
 
@@ -19,6 +21,7 @@ const router = useRouter();
 const { t } = useI18n();
 const api = useApi();
 const { formatDate } = useDateFormatter();
+const userStore = useUserStore();
 
 const loading = ref(false);
 const pagination = ref<Pagination>({
@@ -87,7 +90,11 @@ useHead(() => ({
         {{ $t('labels.roles') }}
       </UiText>
 
-      <UiButton :to="{ name: 'roles-new' }" size="medium-compact">
+      <UiButton
+        v-if="userStore.hasAbility(AbilityName.ROLE_CREATE)"
+        :to="{ name: 'roles-new' }"
+        size="medium-compact"
+      >
         <UiIcon name="add-2-rounded" color="color-inherit" />
       </UiButton>
     </div>
