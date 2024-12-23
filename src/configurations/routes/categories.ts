@@ -24,10 +24,23 @@ const routes: RouteRecordRaw[] = [
     path: '/categories/:id',
     name: 'categories-id',
     component: () => import('@/pages/categories/[id]/index.vue'),
+    redirect: { name: 'categories-id-main' },
     meta: {
       layout: 'default',
       ability: AbilityName.CATEGORY_READ,
     },
+    children: [
+      {
+        path: 'main',
+        name: 'categories-id-main',
+        component: () => import('@/pages/categories/[id]/main.vue'),
+      },
+      {
+        path: 'properties',
+        name: 'categories-id-properties',
+        component: () => import('@/pages/categories/[id]/properties.vue'),
+      },
+    ],
   },
   {
     path: '/categories/:id/edit',

@@ -10,8 +10,6 @@ import UiText from '@/components/ui/text.vue';
 import UiButton from '@/components/ui/button.vue';
 import UiIcon from '@/components/ui/icon.vue';
 import Tabs, { type Tab } from '@/components/tabs/index.vue';
-import PageCategoriesIdTabsMain from '@/components/page/categories/id/tabs/main.vue';
-import PageCategoriesIdTabsProperties from '@/components/page/categories/id/tabs/properties.vue';
 import { AbilityName } from '@/types/models/ability.ts';
 import type { ListCategory } from '@/types/models/category.ts';
 
@@ -37,10 +35,12 @@ const tabs = computed<Tab[]>(() => [
   {
     name: 'main',
     title: t('pages.categories.id.tabs.main'),
+    to: { name: 'categories-id-main', params: { id: categoryId.value } },
   },
   {
     name: 'properties',
     title: t('pages.categories.id.tabs.properties'),
+    to: { name: 'categories-id-properties', params: { id: categoryId.value } },
   },
 ]);
 
@@ -100,14 +100,8 @@ useHead(() => ({
       </div>
     </div>
 
-    <Tabs :tabs>
-      <template #main>
-        <PageCategoriesIdTabsMain />
-      </template>
-
-      <template #properties>
-        <PageCategoriesIdTabsProperties />
-      </template>
+    <Tabs v-if="category" :tabs pages>
+      <RouterView :category />
     </Tabs>
   </div>
 </template>
