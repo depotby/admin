@@ -7,6 +7,7 @@ const i18n = createI18n({
   messages: {
     ru,
   },
+  warnHtmlMessage: false,
 });
 
 export default i18n;

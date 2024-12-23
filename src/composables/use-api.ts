@@ -36,6 +36,8 @@ export const useApi = () => {
         list: (params) => axios('/admin/categories', { method: 'get', params }),
         one: (id) => axios(`/admin/categories/${id}`, { method: 'get' }),
         create: (data) => axios('/admin/categories', { method: 'post', data }),
+        update: (id, data) => axios(`/admin/categories/${id}`, { method: 'put', data }),
+        destroy: (id) => axios(`/admin/categories/${id}`, { method: 'delete' }),
       },
       isAxiosError,
     };

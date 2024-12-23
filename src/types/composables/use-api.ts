@@ -37,6 +37,8 @@ export interface Api {
     list: (params?: ListCategoriesParams) => Response<PaginatedResponse<ListCategory>>;
     one: (id: string) => Response<ListCategory>;
     create: (data: CategoryData) => Response<ListCategory>;
+    update: (id: string, data: CategoryData) => Response<ListCategory>;
+    destroy: (id: string) => Response<void>;
   };
   isAxiosError: typeof isAxiosError;
 }

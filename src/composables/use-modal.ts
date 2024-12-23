@@ -2,6 +2,7 @@ import { ref, computed } from 'vue';
 
 export enum ModalName {
   DELETE_ROLE = 'delete-role',
+  DELETE_CATEGORY = 'delete-category',
 }
 
 export interface ModalState {

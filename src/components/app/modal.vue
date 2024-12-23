@@ -11,6 +11,8 @@ const modalComponent = computed(() => {
   switch (state.value.name) {
     case ModalName.DELETE_ROLE:
       return defineAsyncComponent(() => import('@/components/modal/delete-role.vue'));
+    case ModalName.DELETE_CATEGORY:
+      return defineAsyncComponent(() => import('@/components/modal/delete-category.vue'));
     default:
       return 'div';
   }

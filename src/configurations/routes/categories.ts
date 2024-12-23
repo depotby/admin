@@ -29,6 +29,15 @@ const routes: RouteRecordRaw[] = [
       ability: AbilityName.CATEGORY_READ,
     },
   },
+  {
+    path: '/categories/:id/edit',
+    name: 'categories-id-edit',
+    component: () => import('@/pages/categories/[id]/edit.vue'),
+    meta: {
+      layout: 'default',
+      ability: AbilityName.CATEGORY_UPDATE,
+    },
+  },
 ];
 
 export default routes;
