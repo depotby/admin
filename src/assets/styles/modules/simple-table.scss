@@ -1,0 +1,41 @@
+.simple-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tbody {
+    tr {
+      th,
+      td {
+        padding: 0.25rem 0.5rem;
+        text-align: start;
+        border: 1px solid $color-border;
+
+        &:first-child {
+          border-inline-start: none;
+        }
+
+        &:last-child {
+          border-inline-end: none;
+        }
+      }
+
+      &:first-child {
+        th,
+        td {
+          border-block-start: none;
+        }
+      }
+
+      &:last-child {
+        th,
+        td {
+          border-block-end: none;
+        }
+      }
+
+      &:nth-child(even) {
+        background-color: $color-light;
+      }
+    }
+  }
+}

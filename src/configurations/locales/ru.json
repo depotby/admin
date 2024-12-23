@@ -15,6 +15,7 @@
     "name": "Название",
     "roles": "Роли",
     "type": "Тип",
+    "uri_name": "Название URI",
     "updated_date": "Дата изменения",
     "users": "Пользователи",
     "user_account_types": {
