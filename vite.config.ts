@@ -8,13 +8,14 @@ import getCssModulesNamesGenerator from './utils/css-modules-names-generator';
 
 export default defineConfig({
   build: {
-    emptyOutDir: true,
     assetsInlineLimit: 0,
+    cssCodeSplit: false,
+    emptyOutDir: true,
     rollupOptions: {
       output: {
+        assetFileNames: 'assets/[hash][extname]',
         chunkFileNames: 'chunks/[hash].js',
         entryFileNames: 'entries/[hash].js',
-        assetFileNames: 'assets/[hash][extname]',
       },
     },
   },
