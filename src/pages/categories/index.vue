@@ -9,11 +9,15 @@ import {
   useDataTableOrder,
   type UseDataTableOrderParams,
 } from '@/composables/use-data-table-order.ts';
+import { useUserStore } from '@/stores/user.ts';
 import UiText from '@/components/ui/text.vue';
+import UiButton from '@/components/ui/button.vue';
+import UiIcon from '@/components/ui/icon.vue';
 import DataTable, {
   type DataTableColumn,
   type DataTableItem,
 } from '@/components/data-table/index.vue';
+import { AbilityName } from '@/types/models/ability.ts';
 import type { ListCategoriesParams, ListCategory } from '@/types/models/category.ts';
 
 const dataTableOrderParams: UseDataTableOrderParams = {
@@ -26,6 +30,7 @@ const { t } = useI18n();
 const api = useApi();
 const { pagination, changePage } = usePagination();
 const { order, changeOrder } = useDataTableOrder(dataTableOrderParams, pagination);
+const userStore = useUserStore();
 
 const loading = ref(false);
 const categories = ref<ListCategory[]>([]);
@@ -73,9 +78,19 @@ useHead(() => ({
 
 <template>
   <div :class="$style['page-categories']">
-    <UiText variant="h2">
-      {{ $t('labels.categories') }}
-    </UiText>
+    <div :class="$style['page-categories__header']">
+      <UiText variant="h2">
+        {{ $t('labels.categories') }}
+      </UiText>
+
+      <UiButton
+        v-if="userStore.hasAbility(AbilityName.CATEGORY_CREATE)"
+        :to="{ name: 'categories-new' }"
+        size="medium-compact"
+      >
+        <UiIcon name="add-2-rounded" color="color-inherit" />
+      </UiButton>
+    </div>
 
     <DataTable
       :columns
@@ -95,5 +110,11 @@ useHead(() => ({
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 </style>

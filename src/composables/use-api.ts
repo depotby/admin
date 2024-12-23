@@ -35,6 +35,7 @@ export const useApi = () => {
       categories: {
         list: (params) => axios('/admin/categories', { method: 'get', params }),
         one: (id) => axios(`/admin/categories/${id}`, { method: 'get' }),
+        create: (data) => axios('/admin/categories', { method: 'post', data }),
       },
       isAxiosError,
     };

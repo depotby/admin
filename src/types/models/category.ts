@@ -1,5 +1,12 @@
 import type { BaseOrder, BasePagination } from '@/types/common.ts';
 
+export interface CategoryData {
+  category: {
+    name: string;
+    uri_name: string;
+  };
+}
+
 export interface ListCategory {
   id: string;
   name: string;

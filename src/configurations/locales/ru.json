@@ -54,6 +54,22 @@
     "categories": {
       "meta": {
         "title": "Категории"
+      },
+      "new": {
+        "meta": {
+          "title": "Новая категория"
+        },
+        "title": "Новая категория",
+        "form": {
+          "name": {
+            "label": "Название",
+            "placeholder": "Освежители"
+          },
+          "uri_name": {
+            "label": "URI name",
+            "placeholder": "osvejiteli"
+          }
+        }
       }
     },
     "roles": {
