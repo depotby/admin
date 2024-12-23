@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { useHead } from '@unhead/vue';
 import { useApi } from '@/composables/use-api.ts';
 import { useModal, ModalName } from '@/composables/use-modal.ts';
@@ -8,11 +9,15 @@ import { useUserStore } from '@/stores/user.ts';
 import UiText from '@/components/ui/text.vue';
 import UiButton from '@/components/ui/button.vue';
 import UiIcon from '@/components/ui/icon.vue';
+import Tabs, { type Tab } from '@/components/tabs/index.vue';
+import PageCategoriesIdTabsMain from '@/components/page/categories/id/tabs/main.vue';
+import PageCategoriesIdTabsProperties from '@/components/page/categories/id/tabs/properties.vue';
 import { AbilityName } from '@/types/models/ability.ts';
 import type { ListCategory } from '@/types/models/category.ts';
 
 const route = useRoute();
 const router = useRouter();
+const { t } = useI18n();
 const api = useApi();
 const { open } = useModal();
 const userStore = useUserStore();
@@ -28,6 +33,16 @@ const editPath = computed(() =>
     ? router.resolve({ name: 'categories-id-edit', params: { id: category.value.id } })
     : route.fullPath,
 );
+const tabs = computed<Tab[]>(() => [
+  {
+    name: 'main',
+    title: t('pages.categories.id.tabs.main'),
+  },
+  {
+    name: 'properties',
+    title: t('pages.categories.id.tabs.properties'),
+  },
+]);
 
 const loadCategory = async () => {
   if (loading.value) return;
@@ -84,11 +99,25 @@ useHead(() => ({
         </UiButton>
       </div>
     </div>
+
+    <Tabs :tabs>
+      <template #main>
+        <PageCategoriesIdTabsMain />
+      </template>
+
+      <template #properties>
+        <PageCategoriesIdTabsProperties />
+      </template>
+    </Tabs>
   </div>
 </template>
 
 <style module lang="scss">
 .page-categories-id {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
   &__header {
     display: flex;
     justify-content: space-between;
