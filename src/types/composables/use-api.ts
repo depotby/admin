@@ -9,6 +9,10 @@ import type { PaginatedResponse } from '@/types/common.ts';
 import type { ExtendedListRole, ListRole, RoleData } from '@/types/models/role.ts';
 import type { AbilityName } from '@/types/models/ability.ts';
 import type { CategoryData, ListCategoriesParams, ListCategory } from '@/types/models/category.ts';
+import type {
+  CategoryPropertyData,
+  ListCategoryProperty,
+} from '@/types/models/category-property.ts';
 
 type Response<T> = Promise<AxiosResponse<T>>;
 
@@ -39,6 +43,17 @@ export interface Api {
     create: (data: CategoryData) => Response<ListCategory>;
     update: (id: string, data: CategoryData) => Response<ListCategory>;
     destroy: (id: string) => Response<void>;
+  };
+  category_properties: {
+    list: (category_id: string) => Response<ListCategoryProperty[]>;
+    one: (category_id: string, property_id: string) => Response<ListCategoryProperty>;
+    create: (category_id: string, data: CategoryPropertyData) => Response<ListCategoryProperty>;
+    update: (
+      category_id: string,
+      property_id: string,
+      data: CategoryPropertyData,
+    ) => Response<ListCategoryProperty>;
+    destroy: (category_id: string, property_id: string) => Response<void>;
   };
   isAxiosError: typeof isAxiosError;
 }

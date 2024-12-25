@@ -39,6 +39,21 @@ export const useApi = () => {
         update: (id, data) => axios(`/admin/categories/${id}`, { method: 'put', data }),
         destroy: (id) => axios(`/admin/categories/${id}`, { method: 'delete' }),
       },
+      category_properties: {
+        list: (category_id) =>
+          axios(`/admin/categories/${category_id}/properties`, { method: 'get' }),
+        one: (category_id, property_id) =>
+          axios(`/admin/categories/${category_id}/properties/${property_id}`, { method: 'get' }),
+        create: (category_id, data) =>
+          axios(`/admin/categories/${category_id}/properties`, { method: 'post', data }),
+        update: (category_id, property_id, data) =>
+          axios(`/admin/categories/${category_id}/properties/${property_id}`, {
+            method: 'put',
+            data,
+          }),
+        destroy: (category_id, property_id) =>
+          axios(`/admin/categories/${category_id}/properties/${property_id}`, { method: 'delete' }),
+      },
       isAxiosError,
     };
   }
