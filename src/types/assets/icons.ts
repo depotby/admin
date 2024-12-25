@@ -1,5 +1,6 @@
 export type Icon =
   | 'add-2-rounded'
+  | 'add-circle-outline-rounded'
   | 'arrow-downward-alt-rounded'
   | 'arrow-upward-alt-rounded'
   | 'category-rounded'
@@ -12,4 +13,5 @@ export type Icon =
   | 'ink-pen-rounded'
   | 'loading'
   | 'menu-rounded'
+  | 'save-rounded'
   | 'supervised-user-circle';
