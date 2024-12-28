@@ -36,6 +36,13 @@ export const useMenu = () => {
       icon: 'category-rounded',
       text: t('labels.categories'),
     },
+    {
+      id: Symbol(),
+      routeName: 'products',
+      ability: AbilityName.PRODUCT_READ,
+      icon: 'box-rounded',
+      text: t('labels.products'),
+    },
   ];
 
   const menu = computed<MenuItem[]>(() =>
