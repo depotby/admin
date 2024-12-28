@@ -95,6 +95,29 @@ export const useRole = (role: Ref<ExtendedListRole | undefined>) => {
         ],
         subGroups: [],
       },
+      {
+        name: 'product',
+        text: t('labels.products'),
+        abilities: [
+          {
+            name: AbilityType.CREATE,
+            key: AbilityName.PRODUCT_CREATE,
+          },
+          {
+            name: AbilityType.READ,
+            key: AbilityName.PRODUCT_READ,
+          },
+          {
+            name: AbilityType.UPDATE,
+            key: AbilityName.PRODUCT_UPDATE,
+          },
+          {
+            name: AbilityType.DELETE,
+            key: AbilityName.PRODUCT_DELETE,
+          },
+        ],
+        subGroups: [],
+      },
     ].map(
       (group): RoleGroup => ({
         ...group,
