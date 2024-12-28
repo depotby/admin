@@ -4,6 +4,7 @@ export type Icon =
   | 'add-notes-rounded'
   | 'arrow-downward-alt-rounded'
   | 'arrow-upward-alt-rounded'
+  | 'box-rounded'
   | 'category-rounded'
   | 'check-rounded'
   | 'chevron-left-rounded'
