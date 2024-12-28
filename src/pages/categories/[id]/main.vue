@@ -5,7 +5,7 @@ const props = defineProps<{ category: ListCategory }>();
 </script>
 
 <template>
-  <table :class="simple_table">
+  <table :class="simple_table['simple-table']">
     <tbody>
       <tr>
         <th>{{ $t('labels.name') }}</th>

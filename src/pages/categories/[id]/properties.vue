@@ -92,8 +92,6 @@ loadProperties();
   </div>
 </template>
 
-<style module="simple_table" src="@/assets/styles/modules/simple-table.scss" />
-
 <style module lang="scss">
 .page-categories-id-properties {
   display: flex;
