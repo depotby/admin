@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useApi } from '@/composables/use-api.ts';
 import { useUuid } from '@/composables/use-uuid.ts';
-import { useModal, ModalName } from '@/composables/use-modal.ts';
+import { ModalName, useModal } from '@/composables/use-modal.ts';
+import { useUserStore } from '@/stores/user.ts';
 import UiIcon from '@/components/ui/icon.vue';
 import UiButton from '@/components/ui/button.vue';
 import PageCategoriesIdPropertiesProperty from '@/components/page/categories/id/properties/property.vue';
 import PageCategoriesIdPropertiesNew from '@/components/page/categories/id/properties/new.vue';
+import { AbilityName } from '@/types/models/ability.ts';
 import type { ListCategory } from '@/types/models/category.ts';
 import type { ListCategoryProperty } from '@/types/models/category-property.ts';
 
@@ -14,10 +16,13 @@ const props = defineProps<{ category: ListCategory }>();
 
 const api = useApi();
 const { open } = useModal();
+const userStore = useUserStore();
 
 const loading = ref(false);
 const properties = ref<ListCategoryProperty[]>([]);
 const new_properties = ref<string[]>([]);
+
+const canEdit = computed(() => userStore.hasAbility(AbilityName.CATEGORY_UPDATE));
 
 const loadProperties = async () => {
   if (loading.value) return;
@@ -80,6 +85,7 @@ loadProperties();
     />
 
     <UiButton
+      v-if="canEdit"
       :disabled="loading"
       color="color-green"
       :class="$style['page-categories-id-properties__add-property']"

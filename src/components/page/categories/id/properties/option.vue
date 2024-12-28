@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, useCssModule } from 'vue';
 import { useApi } from '@/composables/use-api.ts';
+import { useUserStore } from '@/stores/user.ts';
 import UiText from '@/components/ui/text.vue';
 import UiFormInput from '@/components/ui/form/input.vue';
 import UiButton from '@/components/ui/button.vue';
 import UiIcon from '@/components/ui/icon.vue';
+import { AbilityName } from '@/types/models/ability.ts';
 import type { ListCategoryProperty } from '@/types/models/category-property.ts';
 import type {
   CategoryPropertyOption,
@@ -24,6 +26,7 @@ const emits = defineEmits<{
 
 const styles = useCssModule();
 const api = useApi();
+const userStore = useUserStore();
 
 const loading = ref(false);
 const changing = ref(false);
@@ -32,6 +35,7 @@ const form = ref<CategoryPropertyOptionData['category_property_option']>({
 });
 const errors = ref<any>();
 
+const canEdit = computed(() => userStore.hasAbility(AbilityName.CATEGORY_UPDATE));
 const isNewOption = computed(() => !props.option);
 const classes = computed(() => ({
   [styles['page-categories-id-properties-option']]: true,
@@ -162,27 +166,29 @@ const deleteOption = async () => {
         {{ props.option?.variant }}
       </UiText>
 
-      <UiButton
-        :disabled="loading"
-        size="small-compact"
-        variant="text"
-        color="color-blue"
-        :class="$style['page-categories-id-properties-option__action']"
-        @click="switchChanging"
-      >
-        <UiIcon name="ink-pen-rounded" color="color-inherit" />
-      </UiButton>
+      <template v-if="canEdit">
+        <UiButton
+          :disabled="loading"
+          size="small-compact"
+          variant="text"
+          color="color-blue"
+          :class="$style['page-categories-id-properties-option__action']"
+          @click="switchChanging"
+        >
+          <UiIcon name="ink-pen-rounded" color="color-inherit" />
+        </UiButton>
 
-      <UiButton
-        :loading
-        size="small-compact"
-        variant="text"
-        color="color-red"
-        :class="$style['page-categories-id-properties-option__action']"
-        @click="deleteOption"
-      >
-        <UiIcon name="delete-rounded" color="color-inherit" />
-      </UiButton>
+        <UiButton
+          :loading
+          size="small-compact"
+          variant="text"
+          color="color-red"
+          :class="$style['page-categories-id-properties-option__action']"
+          @click="deleteOption"
+        >
+          <UiIcon name="delete-rounded" color="color-inherit" />
+        </UiButton>
+      </template>
     </template>
   </div>
 </template>

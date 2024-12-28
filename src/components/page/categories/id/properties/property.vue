@@ -2,11 +2,13 @@
 import { ref, computed, useCssModule } from 'vue';
 import { useUuid } from '@/composables/use-uuid.ts';
 import { useApi } from '@/composables/use-api.ts';
+import { useUserStore } from '@/stores/user.ts';
 import PageCategoriesIdPropertiesOption from '@/components/page/categories/id/properties/option.vue';
 import UiText from '@/components/ui/text.vue';
 import UiFormInput from '@/components/ui/form/input.vue';
 import UiButton from '@/components/ui/button.vue';
 import UiIcon from '@/components/ui/icon.vue';
+import { AbilityName } from '@/types/models/ability.ts';
 import type {
   CategoryPropertyData,
   ListCategoryProperty,
@@ -21,6 +23,7 @@ const emits = defineEmits<{
 
 const styles = useCssModule();
 const api = useApi();
+const userStore = useUserStore();
 
 const changing = ref(false);
 const loading = ref(false);
@@ -31,6 +34,7 @@ const new_property_data = ref<CategoryPropertyData['category_property']>({
 const errors = ref<any>();
 const new_property_options = ref<string[]>([]);
 
+const canEdit = computed(() => userStore.hasAbility(AbilityName.CATEGORY_UPDATE));
 const componentClasses = computed(() => ({
   [styles['page-categories-id-properties-property']]: true,
   [styles['page-categories-id-properties-property--active']]: changing.value,
@@ -110,7 +114,7 @@ const deleteOption = (id: string) => {
 
 <template>
   <div :class="componentClasses">
-    <div :class="$style['page-categories-id-properties-property__actions']">
+    <div v-if="canEdit" :class="$style['page-categories-id-properties-property__actions']">
       <template v-if="changing">
         <UiButton
           v-if="changing"
