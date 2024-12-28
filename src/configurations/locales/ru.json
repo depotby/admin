@@ -3,8 +3,8 @@
     "title_template": "%s - Depot"
   },
   "labels": {
-    "category_properties": "Свойства категории",
     "categories": "Категории",
+    "category_properties": "Свойства категории",
     "created_date": "Дата создания",
     "dashboard": "Панель управления",
     "email": "Email",
@@ -15,13 +15,14 @@
     "name": "Название",
     "roles": "Роли",
     "type": "Тип",
-    "uri_name": "Название URI",
     "updated_date": "Дата изменения",
-    "users": "Пользователи",
+    "uri_name": "Название URI",
     "user_account_types": {
       "employee": "Сотрудник",
       "regular": "Обычный"
-    }
+    },
+    "users": "Пользователи",
+    "variants": "Варианты"
   },
   "actions": {
     "save": "Сохранить",
@@ -82,7 +83,8 @@
             "title": "Изменить \"{name}\""
           },
           "title": "Редактирование \"{name}\""
-        }
+        },
+        "add_property": "Добавить параметр"
       }
     },
     "roles": {
@@ -122,6 +124,9 @@
     },
     "delete_category": {
       "text": "Вы уверены что хотите удалить категорию <b>\"{name}\"</b>? Это действие необратимо."
+    },
+    "delete_category_property": {
+      "text": "Вы уверены что хотите удалить свойство категории <b>\"{name}\"</b>? Во всех связанных с этим свойством продуктах оно пропадет. Это действие необратимо."
     }
   }
 }

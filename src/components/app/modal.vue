@@ -13,6 +13,8 @@ const modalComponent = computed(() => {
       return defineAsyncComponent(() => import('@/components/modal/delete-role.vue'));
     case ModalName.DELETE_CATEGORY:
       return defineAsyncComponent(() => import('@/components/modal/delete-category.vue'));
+    case ModalName.DELETE_CATEGORY_PROPERTY:
+      return defineAsyncComponent(() => import('@/components/modal/delete-category-property.vue'));
     default:
       return 'div';
   }
