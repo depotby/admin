@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, useCssModule } from 'vue';
+import { useUuid } from '@/composables/use-uuid.ts';
 import { useApi } from '@/composables/use-api.ts';
+import PageCategoriesIdPropertiesOption from '@/components/page/categories/id/properties/option.vue';
 import UiText from '@/components/ui/text.vue';
 import UiFormInput from '@/components/ui/form/input.vue';
 import UiButton from '@/components/ui/button.vue';
@@ -9,6 +11,7 @@ import type {
   CategoryPropertyData,
   ListCategoryProperty,
 } from '@/types/models/category-property.ts';
+import type { CategoryPropertyOption } from '@/types/models/category-property-option.ts';
 
 const props = defineProps<{ property: ListCategoryProperty }>();
 const emits = defineEmits<{
@@ -26,6 +29,7 @@ const new_property_data = ref<CategoryPropertyData['category_property']>({
   uri_name: '',
 });
 const errors = ref<any>();
+const new_property_options = ref<string[]>([]);
 
 const componentClasses = computed(() => ({
   [styles['page-categories-id-properties-property']]: true,
@@ -70,6 +74,38 @@ const saveChanges = async () => {
 const deleteProperty = () => {
   emits('destroy');
 };
+
+const addNewOption = () => {
+  new_property_options.value.push(useUuid());
+};
+
+const createOption = (id: string, createdOption: CategoryPropertyOption) => {
+  deleteNewOption(id);
+
+  emits('update', {
+    ...props.property,
+    options: [...props.property.options, createdOption],
+  });
+};
+
+const deleteNewOption = (id: string) => {
+  const index = new_property_options.value.findIndex((item) => item === id);
+  if (index > -1) new_property_options.value.splice(index, 1);
+};
+
+const updateOption = (id: string, updatedOption: CategoryPropertyOption) => {
+  emits('update', {
+    ...props.property,
+    options: [...props.property.options.filter((option) => option.id !== id), updatedOption],
+  });
+};
+
+const deleteOption = (id: string) => {
+  emits('update', {
+    ...props.property,
+    options: props.property.options.filter((option) => option.id !== id),
+  });
+};
 </script>
 
 <template>
@@ -107,6 +143,16 @@ const deleteProperty = () => {
           @click="switchChanging"
         >
           <UiIcon name="ink-pen-rounded" color="color-inherit" size="1.5em" />
+        </UiButton>
+
+        <UiButton
+          :disabled="loading"
+          color="color-dark"
+          size="medium-compact"
+          variant="text"
+          @click="addNewOption"
+        >
+          <UiIcon name="add-notes-rounded" color="color-inherit" size="1.5em" />
         </UiButton>
 
         <UiButton
@@ -152,11 +198,24 @@ const deleteProperty = () => {
     <div :class="$style['page-categories-id-properties-property__variants']">
       <UiText font-weight="600">{{ $t('labels.variants') }}</UiText>
 
-      <div :class="$style['page-categories-id-properties-property__variants__list']">
-        <UiText v-for="option in props.property.options" :key="option.id">
-          {{ option.variant }}
-        </UiText>
-      </div>
+      <ul :class="$style['page-categories-id-properties-property__variants__list']">
+        <li v-for="option in props.property.options" :key="option.id">
+          <PageCategoriesIdPropertiesOption
+            :property="props.property"
+            :option
+            @update="(event) => updateOption(option.id, event)"
+            @destroy="() => deleteOption(option.id)"
+          />
+        </li>
+
+        <li v-for="id in new_property_options" :key="id">
+          <PageCategoriesIdPropertiesOption
+            :property="props.property"
+            @create="(event) => createOption(id, event)"
+            @destroy="() => deleteNewOption(id)"
+          />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -227,12 +286,6 @@ const deleteProperty = () => {
     &__variants {
       grid-column: 1 / 4;
       grid-row: 2 / 3;
-
-      &__list {
-        display: flex;
-        flex-direction: column;
-        gap: 0.125rem;
-      }
     }
 
     &--active,
