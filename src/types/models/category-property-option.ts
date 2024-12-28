@@ -5,3 +5,9 @@ export interface CategoryPropertyOption {
   created_at: string;
   updated_at: string;
 }
+
+export interface CategoryPropertyOptionData {
+  category_property_option: {
+    variant: string;
+  };
+}

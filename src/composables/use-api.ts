@@ -54,6 +54,22 @@ export const useApi = () => {
         destroy: (category_id, property_id) =>
           axios(`/admin/categories/${category_id}/properties/${property_id}`, { method: 'delete' }),
       },
+      category_property_options: {
+        create: (category_id, property_id, data) =>
+          axios(`/admin/categories/${category_id}/properties/${property_id}/options`, {
+            method: 'post',
+            data,
+          }),
+        update: (category_id, property_id, option_id, data) =>
+          axios(`/admin/categories/${category_id}/properties/${property_id}/options/${option_id}`, {
+            method: 'put',
+            data,
+          }),
+        destroy: (category_id, property_id, option_id) =>
+          axios(`/admin/categories/${category_id}/properties/${property_id}/options/${option_id}`, {
+            method: 'delete',
+          }),
+      },
       isAxiosError,
     };
   }

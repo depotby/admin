@@ -13,6 +13,10 @@ import type {
   CategoryPropertyData,
   ListCategoryProperty,
 } from '@/types/models/category-property.ts';
+import type {
+  CategoryPropertyOption,
+  CategoryPropertyOptionData,
+} from '@/types/models/category-property-option.ts';
 
 type Response<T> = Promise<AxiosResponse<T>>;
 
@@ -54,6 +58,20 @@ export interface Api {
       data: CategoryPropertyData,
     ) => Response<ListCategoryProperty>;
     destroy: (category_id: string, property_id: string) => Response<void>;
+  };
+  category_property_options: {
+    create: (
+      category_id: string,
+      property_id: string,
+      data: CategoryPropertyOptionData,
+    ) => Response<CategoryPropertyOption>;
+    update: (
+      category_id: string,
+      property_id: string,
+      option_id: string,
+      data: CategoryPropertyOptionData,
+    ) => Response<CategoryPropertyOption>;
+    destroy: (category_id: string, property_id: string, option_id: string) => Response<void>;
   };
   isAxiosError: typeof isAxiosError;
 }
