@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import authentication from '@/configurations/routes/authentication.ts';
 import categories from '@/configurations/routes/categories.ts';
 import dashboard from '@/configurations/routes/dashboard.ts';
+import products from '@/configurations/routes/products.ts';
 import roles from '@/configurations/routes/roles.ts';
 import users from '@/configurations/routes/users.ts';
 import { useUserStore } from '@/stores/user.ts';
@@ -12,6 +13,7 @@ const router = createRouter({
     ...authentication,
     ...categories,
     ...dashboard,
+    ...products,
     ...roles,
     ...users,
     {
