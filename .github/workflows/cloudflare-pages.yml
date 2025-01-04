@@ -10,6 +10,7 @@ concurrency:
 
 jobs:
   publish:
+    if: github.actor != 'dependabot[bot]'
     name: build & publish
     runs-on: ubuntu-latest
     permissions:
