@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useHead } from '@unhead/vue';
 import { useApi } from '@/composables/use-api.ts';
-import { useDateFormatter } from '@/composables/use-date-formatter.ts';
+import { useFormatter } from '@/composables/use-formatter.ts';
 import { useUserStore } from '@/stores/user.ts';
 import UiText from '@/components/ui/text.vue';
 import UiButton from '@/components/ui/button.vue';
@@ -20,7 +20,7 @@ import type { ListRole } from '@/types/models/role.ts';
 const router = useRouter();
 const { t } = useI18n();
 const api = useApi();
-const { formatDate } = useDateFormatter();
+const { dateFormatter } = useFormatter();
 const userStore = useUserStore();
 
 const loading = ref(false);
@@ -54,8 +54,8 @@ const columns = computed<DataTableColumn[]>(() =>
 const formattedRoles = computed<DataTableItem[]>(() =>
   roles.value.map((item) => ({
     ...item,
-    created_at: formatDate(item.created_at, 'DD.MM.YYYY'),
-    updated_at: formatDate(item.updated_at, 'DD.MM.YYYY'),
+    created_at: dateFormatter(item.created_at, 'DD.MM.YYYY'),
+    updated_at: dateFormatter(item.updated_at, 'DD.MM.YYYY'),
     rowOptions: {
       url: router.resolve({ name: 'roles-id', params: { id: item.id } }).fullPath,
     },

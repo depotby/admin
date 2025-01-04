@@ -9,7 +9,7 @@ import {
   type UseDataTableOrderParams,
 } from '@/composables/use-data-table-order.ts';
 import { usePagination } from '@/composables/use-pagination.ts';
-import { useDateFormatter } from '@/composables/use-date-formatter.ts';
+import { useFormatter } from '@/composables/use-formatter.ts';
 import UiText from '@/components/ui/text.vue';
 import DataTable, {
   type DataTableColumn,
@@ -27,7 +27,7 @@ const { t } = useI18n();
 const api = useApi();
 const { pagination, changePage } = usePagination();
 const { order, changeOrder } = useDataTableOrder(dataTableOrderParams, pagination);
-const { formatDate } = useDateFormatter();
+const { dateFormatter } = useFormatter();
 
 const loading = ref(false);
 const roles = ref<ListUser[]>([]);
@@ -69,8 +69,8 @@ const formattedRoles = computed<DataTableItem[]>(() =>
     (item): DataTableItem => ({
       ...item,
       account_type: t(`labels.user_account_types.${item.account_type}`),
-      created_at: formatDate(item.created_at, 'DD.MM.YYYY'),
-      updated_at: formatDate(item.created_at, 'DD.MM.YYYY'),
+      created_at: dateFormatter(item.created_at, 'DD.MM.YYYY'),
+      updated_at: dateFormatter(item.created_at, 'DD.MM.YYYY'),
       rowOptions: {
         url: router.resolve({ name: 'users-id', params: { id: item.id } })?.fullPath,
       },

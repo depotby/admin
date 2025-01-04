@@ -1,5 +1,5 @@
-export const useDateFormatter = () => {
-  const formatDate = (date: string, format: string) => {
+export const useFormatter = () => {
+  const dateFormatter = (date: string, format: string) => {
     const instance = new Date(date);
 
     const year = String(instance.getFullYear());
@@ -19,7 +19,11 @@ export const useDateFormatter = () => {
       .replace('ss', second);
   };
 
+  const currencyFormatter = (value?: number | string) =>
+    value && new Intl.NumberFormat('ru-BY', { style: 'currency', currency: 'BYN' }).format(+value);
+
   return {
-    formatDate,
+    dateFormatter,
+    currencyFormatter,
   };
 };
