@@ -13,6 +13,7 @@
     "loading_with_dots": "Загрузка...",
     "middle_name": "Отчество",
     "name": "Название",
+    "price": "Цена",
     "product": "Продукт",
     "products": "Продукты",
     "roles": "Роли",
@@ -117,6 +118,11 @@
     "users": {
       "meta": {
         "title": "Пользователи"
+      }
+    },
+    "products": {
+      "meta": {
+        "title": "Продукты"
       }
     }
   },
