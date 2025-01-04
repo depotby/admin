@@ -112,7 +112,7 @@ useHead(() => ({
     <DataTable
       :columns
       :order
-      :pagination
+      :loading
       :items="formattedRoles"
       :pages="pagination.pages"
       :page="pagination.page"
