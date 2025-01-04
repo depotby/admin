@@ -17,6 +17,8 @@ import type {
   CategoryPropertyOption,
   CategoryPropertyOptionData,
 } from '@/types/models/category-property-option.ts';
+import type { ListProduct, ListProductsParams, ProductData } from '@/types/models/product.ts';
+import type { ProductPrice, ProductPriceData } from '@/types/models/product-price.ts';
 
 type Response<T> = Promise<AxiosResponse<T>>;
 
@@ -72,6 +74,16 @@ export interface Api {
       data: CategoryPropertyOptionData,
     ) => Response<CategoryPropertyOption>;
     destroy: (category_id: string, property_id: string, option_id: string) => Response<void>;
+  };
+  products: {
+    list: (params?: ListProductsParams) => Response<PaginatedResponse<ListProduct>>;
+    one: (id: string) => Response<ListProduct>;
+    create: (data: ProductData) => Response<ListProduct>;
+    update: (id: string, data: ProductData) => Response<ListProduct>;
+    destroy: (id: string) => Response<void>;
+  };
+  product_prices: {
+    create: (id: string, data: ProductPriceData) => Response<ProductPrice>;
   };
   isAxiosError: typeof isAxiosError;
 }

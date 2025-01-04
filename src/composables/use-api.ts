@@ -70,6 +70,16 @@ export const useApi = () => {
             method: 'delete',
           }),
       },
+      products: {
+        list: (params) => axios('/admin/products', { method: 'get', params }),
+        create: (data) => axios(`/admin/products`, { method: 'post', data }),
+        one: (id) => axios(`/admin/products/${id}`, { method: 'get' }),
+        update: (id, data) => axios(`/admin/products/${id}`, { method: 'put', data }),
+        destroy: (id) => axios(`/admin/products/${id}`, { method: 'delete' }),
+      },
+      product_prices: {
+        create: (id, data) => axios(`/admin/products/${id}/prices`, { method: 'post', data }),
+      },
       isAxiosError,
     };
   }
