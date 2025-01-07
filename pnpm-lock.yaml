@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@unhead/vue':
-        specifier: ^1.11.14
-        version: 1.11.14(vue@3.5.13(typescript@5.6.3))
+        specifier: ^1.11.15
+        version: 1.11.15(vue@3.5.13(typescript@5.6.3))
       axios:
         specifier: ^1.7.9
         version: 1.7.9
@@ -876,17 +876,17 @@ packages:
     resolution: {integrity: sha512-zORcwn4C3trOWiCqFQP1x6G3xTRyZ1LYydnj51cRnJ6hxBlr/cKPckk+PKPUw/fXmvfKTcw7bwY3w9izgx5jZw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@unhead/dom@1.11.14':
-    resolution: {integrity: sha512-FaHCWo9JR4h7PCpSRaXuMC6ifXOuBzlI0PD1MmUcxND2ayDl1d6DauIbN8TUf9TDRxNkrK1Ehb0OCXjC1ZJtrg==}
+  '@unhead/dom@1.11.15':
+    resolution: {integrity: sha512-2OZ7zvZQLqlqkhvsKsNOhxxoO3vgjygzzrmtooQR9QNKY+3HjwJ3+QfjGswXI976YV7VJem57ydQSMk1ijB7yg==}
 
-  '@unhead/schema@1.11.14':
-    resolution: {integrity: sha512-V9W9u5tF1/+TiLqxu+Qvh1ShoMDkPEwHoEo4DKdDG6ko7YlbzFfDxV6el9JwCren45U/4Vy/4Xi7j8OH02wsiA==}
+  '@unhead/schema@1.11.15':
+    resolution: {integrity: sha512-UkLz1dqw4yoh4jELEyLsgSG7yrXc+gv68GkQeTv8LysEPa8sXtFqhfuqTBLhY3sHqSnP8RkDknhtFhG2S3fuKQ==}
 
-  '@unhead/shared@1.11.14':
-    resolution: {integrity: sha512-41Qt4PJKYVrEGOTXgBJLRYrEu3S7n5stoB4TFC6312CIBVedXqg7voHQurn32LVDjpfJftjLa2ggCjpqdqoRDw==}
+  '@unhead/shared@1.11.15':
+    resolution: {integrity: sha512-VT42ssmwpFGfixfXqAZ+Rn7KyNG0yFqWGsvLOXIgahiTzh3N1k2st1tPvuYFZU22dtWBNxG7cvy8yxUd1vunMQ==}
 
-  '@unhead/vue@1.11.14':
-    resolution: {integrity: sha512-6nfi7FsZ936gscmj+1nUB1pybiFMFbnuEFo7B/OY2klpLWsYDUOVvpsJhbu7C3u7wkTlJXglmAk6jdd8I7WgZA==}
+  '@unhead/vue@1.11.15':
+    resolution: {integrity: sha512-2NT8Kph5AvB/qO+C8UKAc7cudbFRZTJk0eRpn8o1nG3yk2+mWvN0vsTTjnKvXixNF193I/R+zqo/NkcjgaWG9A==}
     peerDependencies:
       vue: '>=2.7 || >=3'
 
@@ -1153,9 +1153,6 @@ packages:
   define-lazy-prop@3.0.0:
     resolution: {integrity: sha512-N+MeXYoqr3pOgn8xfyRPREN7gHakLYjhsHhWGT3fWAiL4IkAt0iDw14QiiEm2bE30c5XX5q0FtAA3CK5f9/BUg==}
     engines: {node: '>=12'}
-
-  defu@6.1.4:
-    resolution: {integrity: sha512-mEQCMmwJu317oSz8CwdIOdwf3xMif1ttiM8LTufzc3g6kR+9Pe236twL8j3IYT1F7GfRgGcW6MWxzZjLIkuHIg==}
 
   delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
@@ -1630,6 +1627,9 @@ packages:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
     engines: {node: '>=10'}
 
+  packrup@0.1.2:
+    resolution: {integrity: sha512-ZcKU7zrr5GlonoS9cxxrb5HVswGnyj6jQvwFBa6p5VFw7G71VAHcUKL5wyZSU/ECtPM/9gacWxy2KFQKt1gMNA==}
+
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -1873,8 +1873,8 @@ packages:
   undici-types@6.20.0:
     resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
-  unhead@1.11.14:
-    resolution: {integrity: sha512-XmXW0aZyX9kGk9ejCKCSvv/J4T3Rt4hoAe2EofM+nhG+zwZ7AArUMK/0F/fj6FTkfgY0u0/JryE00qUDULgygA==}
+  unhead@1.11.15:
+    resolution: {integrity: sha512-fA0rYB7qMHKY4sg0yzEXhi0cqiF/nl/OUKNaXOS9ChJwCjJxabpZvmQIUOiGS+1ckoFbZc3qZnhDLpdeNhOQwg==}
 
   unicorn-magic@0.3.0:
     resolution: {integrity: sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA==}
@@ -2704,27 +2704,27 @@ snapshots:
       '@typescript-eslint/types': 8.18.2
       eslint-visitor-keys: 4.2.0
 
-  '@unhead/dom@1.11.14':
+  '@unhead/dom@1.11.15':
     dependencies:
-      '@unhead/schema': 1.11.14
-      '@unhead/shared': 1.11.14
+      '@unhead/schema': 1.11.15
+      '@unhead/shared': 1.11.15
 
-  '@unhead/schema@1.11.14':
+  '@unhead/schema@1.11.15':
     dependencies:
       hookable: 5.5.3
       zhead: 2.2.4
 
-  '@unhead/shared@1.11.14':
+  '@unhead/shared@1.11.15':
     dependencies:
-      '@unhead/schema': 1.11.14
+      '@unhead/schema': 1.11.15
+      packrup: 0.1.2
 
-  '@unhead/vue@1.11.14(vue@3.5.13(typescript@5.6.3))':
+  '@unhead/vue@1.11.15(vue@3.5.13(typescript@5.6.3))':
     dependencies:
-      '@unhead/schema': 1.11.14
-      '@unhead/shared': 1.11.14
-      defu: 6.1.4
+      '@unhead/schema': 1.11.15
+      '@unhead/shared': 1.11.15
       hookable: 5.5.3
-      unhead: 1.11.14
+      unhead: 1.11.15
       vue: 3.5.13(typescript@5.6.3)
 
   '@vitejs/plugin-vue@5.2.1(vite@6.0.7(@types/node@22.10.5)(sass@1.83.1)(tsx@4.19.2))(vue@3.5.13(typescript@5.6.3))':
@@ -3048,8 +3048,6 @@ snapshots:
       default-browser-id: 5.0.0
 
   define-lazy-prop@3.0.0: {}
-
-  defu@6.1.4: {}
 
   delayed-stream@1.0.0: {}
 
@@ -3551,6 +3549,8 @@ snapshots:
     dependencies:
       p-limit: 3.1.0
 
+  packrup@0.1.2: {}
+
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -3762,11 +3762,11 @@ snapshots:
 
   undici-types@6.20.0: {}
 
-  unhead@1.11.14:
+  unhead@1.11.15:
     dependencies:
-      '@unhead/dom': 1.11.14
-      '@unhead/schema': 1.11.14
-      '@unhead/shared': 1.11.14
+      '@unhead/dom': 1.11.15
+      '@unhead/schema': 1.11.15
+      '@unhead/shared': 1.11.15
       hookable: 5.5.3
 
   unicorn-magic@0.3.0: {}
