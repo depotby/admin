@@ -7,5 +7,5 @@ export interface MenuItem {
   ability?: AbilityName;
   icon: Icon;
   text: string;
-  // items?: MenuItem[];
+  active: boolean;
 }

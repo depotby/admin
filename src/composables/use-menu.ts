@@ -1,14 +1,16 @@
 import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useUserStore } from '@/stores/user.ts';
 import { AbilityName } from '@/types/models/ability.ts';
 import type { MenuItem } from '@/types/composables/use-menu.ts';
 
 export const useMenu = () => {
+  const route = useRoute();
   const { t } = useI18n();
   const userStore = useUserStore();
 
-  const menuItems: MenuItem[] = [
+  const menuItems: Omit<MenuItem, 'active'>[] = [
     {
       id: Symbol(),
       routeName: 'index',
@@ -46,7 +48,12 @@ export const useMenu = () => {
   ];
 
   const menu = computed<MenuItem[]>(() =>
-    menuItems.filter((item) => !item.ability || userStore.user?.abilities.includes(item.ability)),
+    menuItems
+      .filter((item) => !item.ability || userStore.user?.abilities.includes(item.ability))
+      .map((item) => ({
+        ...item,
+        active: !!route.name?.toString().startsWith(item.routeName),
+      })),
   );
 
   return {

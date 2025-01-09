@@ -47,8 +47,10 @@ watch(
         v-for="item in menu"
         :key="item.id"
         :to="{ name: item.routeName }"
-        :active-class="$style['app-menu__menu__link--active']"
-        :class="$style['app-menu__menu__link']"
+        :class="{
+          [$style['app-menu__menu__link']]: true,
+          [$style['app-menu__menu__link--active']]: item.active,
+        }"
       >
         <UiIcon :name="item.icon" color="color-inherit" size="2rem" />
 
