@@ -151,16 +151,6 @@ const deleteOption = (id: string) => {
 
         <UiButton
           :disabled="loading"
-          color="color-dark"
-          size="medium-compact"
-          variant="text"
-          @click="addNewOption"
-        >
-          <UiIcon name="add-notes-rounded" color="color-inherit" size="1.5em" />
-        </UiButton>
-
-        <UiButton
-          :disabled="loading"
           size="medium-compact"
           variant="text"
           color="color-red"
@@ -200,7 +190,23 @@ const deleteOption = (id: string) => {
     </div>
 
     <div :class="$style['page-categories-id-properties-property__variants']">
-      <UiText font-weight="600">{{ $t('labels.variants') }}</UiText>
+      <div :class="$style['page-categories-id-properties-property__variants__header']">
+        <UiText font-weight="600">
+          {{ $t('labels.variants') }}
+        </UiText>
+
+        <UiButton
+          v-if="canEdit"
+          :disabled="loading"
+          color="color-dark"
+          size="medium-compact"
+          variant="text"
+          :class="$style['page-categories-id-properties-property__variants__header__add']"
+          @click="addNewOption"
+        >
+          <UiIcon name="add-circle-outline-rounded" color="color-green" size="1.5em" />
+        </UiButton>
+      </div>
 
       <ul :class="$style['page-categories-id-properties-property__variants__list']">
         <li v-for="option in props.property.options" :key="option.id">
@@ -290,6 +296,15 @@ const deleteOption = (id: string) => {
     &__variants {
       grid-column: 1 / 4;
       grid-row: 2 / 3;
+
+      &__header {
+        display: flex;
+
+        &__add {
+          opacity: 0;
+          transition: opacity $duration-fast ease-in-out;
+        }
+      }
     }
 
     &--active,
@@ -297,6 +312,14 @@ const deleteOption = (id: string) => {
       #{$component-class} {
         &__actions {
           opacity: 1;
+        }
+
+        &__variants {
+          &__header {
+            &__add {
+              opacity: 1;
+            }
+          }
         }
       }
     }

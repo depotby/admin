@@ -1,7 +1,6 @@
 export type Icon =
   | 'add-2-rounded'
   | 'add-circle-outline-rounded'
-  | 'add-notes-rounded'
   | 'arrow-downward-alt-rounded'
   | 'arrow-upward-alt-rounded'
   | 'box-rounded'
