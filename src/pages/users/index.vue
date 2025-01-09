@@ -70,7 +70,7 @@ const formattedRoles = computed<DataTableItem[]>(() =>
       ...item,
       account_type: t(`labels.user_account_types.${item.account_type}`),
       created_at: dateFormatter(item.created_at, 'DD.MM.YYYY'),
-      updated_at: dateFormatter(item.created_at, 'DD.MM.YYYY'),
+      updated_at: dateFormatter(item.updated_at, 'DD.MM.YYYY'),
       rowOptions: {
         url: router.resolve({ name: 'users-id', params: { id: item.id } })?.fullPath,
       },
