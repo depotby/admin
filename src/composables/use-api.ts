@@ -22,6 +22,7 @@ export const useApi = () => {
       users: {
         list: (params) => axios('/admin/users', { method: 'get', params }),
         one: (id) => axios(`/admin/users/${id}`, { method: 'get' }),
+        switch_type: (id) => axios(`/admin/users/${id}/switch-type`, { method: 'post' }),
       },
       roles: {
         list: () => axios('/admin/roles', { method: 'get' }),
