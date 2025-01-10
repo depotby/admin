@@ -37,7 +37,7 @@ export interface Api {
     switch_type: (id: string) => Response<ExtendedListUser>;
   };
   roles: {
-    list: () => Response<PaginatedResponse<ListRole>>;
+    list: () => Response<ListRole[]>;
     one: (id: string) => Response<ExtendedListRole>;
     create: (data: RoleData) => Response<ExtendedListRole>;
     update: (id: string, data: RoleData) => Response<ExtendedListRole>;

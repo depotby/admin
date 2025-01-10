@@ -14,7 +14,6 @@ import DataTable, {
   type DataTableItem,
 } from '@/components/data-table/index.vue';
 import { AbilityName } from '@/types/models/ability.ts';
-import type { Pagination } from '@/types/common.ts';
 import type { ListRole } from '@/types/models/role.ts';
 
 const router = useRouter();
@@ -24,12 +23,6 @@ const { dateFormatter } = useFormatter();
 const userStore = useUserStore();
 
 const loading = ref(false);
-const pagination = ref<Pagination>({
-  limit: 0,
-  page: 1,
-  pages: 1,
-  count: 0,
-});
 const roles = ref<ListRole[]>([]);
 
 const columns = computed<DataTableColumn[]>(() =>
@@ -67,11 +60,8 @@ const loadRoles = async () => {
 
   loading.value = true;
   try {
-    const {
-      data: { items, ...receivedPagination },
-    } = await api.roles.list();
-    roles.value = items;
-    pagination.value = receivedPagination;
+    const { data } = await api.roles.list();
+    roles.value = data;
   } catch {}
   loading.value = false;
 };
@@ -99,7 +89,7 @@ useHead(() => ({
       </UiButton>
     </div>
 
-    <DataTable :columns :pagination :items="formattedRoles" />
+    <DataTable :columns :items="formattedRoles" />
   </div>
 </template>
 
