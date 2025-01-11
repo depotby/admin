@@ -10,6 +10,7 @@ const styles = useCssModule();
 interface Props {
   name: Icon;
   size?: number | string;
+  strokeWidth?: number | string;
   color?: Color;
   rotate?: 0 | 90 | 180 | 270 | '0' | '90' | '180' | '270';
   rotateTransition?: boolean;
@@ -18,6 +19,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   sprite: 'main',
   size: 24,
+  strokeWidth: 0,
   color: 'color-black',
   backgroundShape: 'circle',
   rotate: 0,
@@ -27,6 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
 const style = computed(() => ({
   color: useCssVariable(props.color).value,
   size: isNaN(+props.size) ? props.size : `${props.size}px`,
+  strokeWidth: props.strokeWidth,
   transform: props.rotate ? `rotate(${props.rotate}deg)` : 'none',
 }));
 
@@ -46,6 +49,7 @@ const classes = computed(() => ({
 .ui-icon {
   width: v-bind('style.size');
   height: v-bind('style.size');
+  stroke-width: v-bind('style.strokeWidth');
   color: v-bind('style.color');
   transform: v-bind('style.transform');
 
