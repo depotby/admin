@@ -130,6 +130,25 @@
     "products": {
       "meta": {
         "title": "Продукты"
+      },
+      "new": {
+        "meta": {
+          "title": "Новый продукт"
+        },
+        "title": "Новый продукт",
+        "form": {
+          "category_id": {
+            "label": "Категория"
+          },
+          "name": {
+            "label": "Название",
+            "placeholder": "Безворсовая тряпка"
+          },
+          "uri_name": {
+            "label": "URI name",
+            "placeholder": "bezvorsovaja-tryaapka"
+          }
+        }
       }
     }
   },
