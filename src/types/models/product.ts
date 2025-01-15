@@ -16,7 +16,9 @@ export interface ListProductsParams extends BasePagination, BaseOrder {
 }
 
 export interface ProductData {
-  category_id: string;
-  name: string;
-  uri_name: string;
+  product: {
+    category_id: string;
+    name: string;
+    uri_name: string;
+  };
 }
