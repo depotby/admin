@@ -13,6 +13,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       output: {
+        manualChunks: () => 'everything',
         assetFileNames: 'assets/[hash][extname]',
         chunkFileNames: 'chunks/[hash].js',
         entryFileNames: 'entries/[hash].js',
