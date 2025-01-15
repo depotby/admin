@@ -23,13 +23,14 @@ const errors = ref<any>();
 const createCategory = async () => {
   if (loading.value) return;
 
+  errors.value = undefined;
   loading.value = true;
   try {
     const { data } = await api.categories.create({ category: form.value });
     await router.push({ name: 'categories-id', params: { id: data.id } });
   } catch (e) {
     if (api.isAxiosError(e) && e.response?.status === 422) {
-      errors.value = e.response.data;
+      errors.value = e.response.data.fields;
     }
   }
   loading.value = false;
@@ -51,6 +52,7 @@ useHead(() => ({
         v-model="form.name"
         :label="$t('pages.categories.new.form.name.label')"
         :placeholder="$t('pages.categories.new.form.name.placeholder')"
+        :error="errors?.name"
         :disabled="loading"
         name="name"
         required
@@ -60,6 +62,7 @@ useHead(() => ({
         v-model="form.uri_name"
         :label="$t('pages.categories.new.form.uri_name.label')"
         :placeholder="$t('pages.categories.new.form.uri_name.placeholder')"
+        :error="errors?.uri_name"
         :disabled="loading"
         name="uri_name"
         required
