@@ -57,6 +57,8 @@ const inputString = computed(() =>
 const errors = computed(() => (Array.isArray(props.error) ? props.error.join(', ') : props.error));
 
 const switchOpen = (state?: boolean) => {
+  if (props.disabled) return;
+
   open.value = state ?? !open.value;
 };
 
