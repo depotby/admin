@@ -6,16 +6,20 @@ import { useHead } from '@unhead/vue';
 import { useApi } from '@/composables/use-api.ts';
 import { useFormatter } from '@/composables/use-formatter.ts';
 import { usePagination } from '@/composables/use-pagination.ts';
+import { useUserStore } from '@/stores/user.ts';
 import UiText from '@/components/ui/text.vue';
+import UiButton from '@/components/ui/button.vue';
+import UiIcon from '@/components/ui/icon.vue';
 import DataTable, {
   type DataTableColumn,
   type DataTableItem,
 } from '@/components/data-table/index.vue';
-import type { ListProduct, ListProductsParams } from '@/types/models/product.ts';
 import {
   useDataTableOrder,
   type UseDataTableOrderParams,
 } from '@/composables/use-data-table-order.ts';
+import { AbilityName } from '@/types/models/ability.ts';
+import type { ListProduct, ListProductsParams } from '@/types/models/product.ts';
 
 const dataTableOrderParams: UseDataTableOrderParams = {
   default: { param: 'name', direction: 'asc' },
@@ -28,6 +32,7 @@ const api = useApi();
 const { currencyFormatter, dateFormatter } = useFormatter();
 const { pagination, changePage } = usePagination();
 const { order, changeOrder } = useDataTableOrder(dataTableOrderParams, pagination);
+const userStore = useUserStore();
 
 const loading = ref(false);
 const items = ref<ListProduct[]>([]);
@@ -102,6 +107,14 @@ useHead(() => ({
       <UiText variant="h2">
         {{ $t('labels.products') }}
       </UiText>
+
+      <UiButton
+        v-if="userStore.hasAbility(AbilityName.PRODUCT_CREATE)"
+        :to="{ name: 'products-new' }"
+        size="medium-compact"
+      >
+        <UiIcon name="add-2-rounded" color="color-inherit" />
+      </UiButton>
     </div>
 
     <DataTable
