@@ -26,6 +26,7 @@ const roles = ref<ListRole[]>([]);
 const isEmployee = computed(() => props.user.account_type === UserAccountType.employee);
 const activeRolesIds = computed(() => props.user.roles.map((role) => role.id));
 const hasEditAbility = computed(() => userStore.hasAbility(AbilityName.USER_TYPE_UPDATE));
+const hasRolesUpdateAbility = computed(() => userStore.hasAbility(AbilityName.USER_ROLES_UPDATE));
 const formattedRoles = computed<UiFormSelectItem[]>(() =>
   roles.value.map((role) => ({
     name: role.name,
@@ -63,6 +64,7 @@ loadRoles();
             :model-value="activeRolesIds"
             :items="formattedRoles"
             :loading="props.loading"
+            :disabled="!hasRolesUpdateAbility"
             multiple
             @switch-selection="(event) => emit('switchRole', event)"
           />
