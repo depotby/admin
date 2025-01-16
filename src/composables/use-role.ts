@@ -47,6 +47,16 @@ export const useRole = (role: Ref<ExtendedListRole | undefined>) => {
               },
             ],
           },
+          {
+            name: 'user_roles',
+            text: t('labels.roles'),
+            abilities: [
+              {
+                name: AbilityType.UPDATE,
+                key: AbilityName.USER_ROLES_UPDATE,
+              },
+            ],
+          },
         ],
       },
       {
