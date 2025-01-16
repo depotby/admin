@@ -54,6 +54,17 @@ const switchAccountType = async () => {
   loading.value = false;
 };
 
+const switchRole = async (id: string) => {
+  if (loading.value) return;
+
+  loading.value = true;
+  try {
+    const { data } = await api.users.switch_role(userId.value, id);
+    user.value = data;
+  } catch {}
+  loading.value = false;
+};
+
 loadUser();
 
 useHead(() => ({
@@ -68,7 +79,12 @@ useHead(() => ({
     </UiText>
 
     <Tabs v-if="user" :tabs pages>
-      <RouterView :user @switch-account-type="switchAccountType" />
+      <RouterView
+        :loading
+        :user
+        @switch-account-type="switchAccountType"
+        @switch-role="switchRole"
+      />
     </Tabs>
   </div>
 </template>
