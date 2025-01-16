@@ -51,7 +51,6 @@ loadRoles();
         <td>
           <UiFormSwitch
             :model-value="isEmployee"
-            label="test"
             :disabled="!hasEditAbility || props.loading"
             @update:model-value="() => emit('switchAccountType')"
           />
