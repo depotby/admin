@@ -46,6 +46,6 @@
     "vite": "^6.0.7",
     "vite-plugin-vue-devtools": "^7.7.0",
     "vue-tsc": "^2.2.0",
-    "wrangler": "^3.102.0"
+    "wrangler": "^3.103.1"
   }
 }
