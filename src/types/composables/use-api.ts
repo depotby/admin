@@ -35,6 +35,7 @@ export interface Api {
     list: (params?: ListUsersParams) => Response<PaginatedResponse<ListUser>>;
     one: (id: string) => Response<ExtendedListUser>;
     switch_type: (id: string) => Response<ExtendedListUser>;
+    switch_role: (id: string, role_id: string) => Response<ExtendedListUser>;
   };
   roles: {
     list: () => Response<ListRole[]>;
